@@ -413,3 +413,100 @@
 \end{lstlisting}
 
 Операторы \textit{break} и \textit{continue} имеют такой же эффект, что и в циклах \textit{while} и \textit{do-while}.
+
+\subsection{Массивы}
+\subsubsection{Одномерные массивы}
+Общая структура:
+\begin{lstlisting}
+    Type arrayName[arraySize];
+\end{lstlisting}
+
+\textit{Type} --- тип массива (массив может состоять из целых чисел, дробных, символов, \ldots); \textit{arrayName}~---~название массива; \textit{arraySize}~---~размер массива. Индексы, по которым можно обращаться к элементам массива, лежат в диапазоне $\left[ 0 \ldots \text{arraySize} - 1 \right]$. Обращение к элементу одномерного массива по индексу --- arrayName[\textit{index}].
+
+Инициализация одномерного массива:
+\begin{itemize}
+    \item Использовать инициализатор \{\} при объявлении массива:
+    \begin{lstlisting}
+        int costs[4] = {100, 200, 300, 400};
+    \end{lstlisting}
+    
+    В таком случае можно не указывать размер массива:
+    \begin{lstlisting}
+        int costs[] = {2, 4, 6};
+    \end{lstlisting}
+    
+    \item Инициализировать массив при помощи циклов:
+    \begin{lstlisting}
+        const int arraySize = 5;
+        int myArray[arraySize];
+        
+        for (int i = 0; i < arraySize; ++i)
+            myArray[i] = ...;
+    \end{lstlisting}
+\end{itemize}
+
+Пример инициализированного массива:
+
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+  Индекс массива & 0 & 1 & 2 & 3 \\
+  \hline
+  Значение массива & 34 & -4 & 11 & 64 \\
+  \hline
+\end{tabular}
+
+Рекомендуется при работе с одномерными массивами инициализировать их, т.к. в противном случае в элементах массивов будет записан <<мусор>>!
+
+\subsubsection{Двумерные массивы}
+Общая структура:
+\begin{lstlisting}
+    Type arrayName[arraySizeRow][arraySizeColumn];
+\end{lstlisting}
+
+\textit{Type} --- тип массива (массив может состоять из целых чисел, дробных, символов, \ldots); \textit{arrayName}~---~название массива; \textit{arraySizeRow}~---~количество одномерных массивов, \textit{arraySizeColumn}~---~размер каждого одномерного массива. Количество одномерных массивов лежит в диапазоне $\left[ 0 \ldots \text{arraySizeRow} - 1 \right]$, размерность одномерных массивов~---~$\left[ 0 \ldots \text{arraySizeColumn} - 1 \right]$. Обращение к элементу двумерного массива по индексам --- arrayName[\textit{indexRow}][\textit{indexColumn}].
+
+Инициализация двумерного массива:
+\begin{itemize}
+    \item Использовать инициализатор \{\} при объявлении массива:
+    \begin{lstlisting}
+        int example[][5] = 
+        {
+            {100, 200, 300, 400},
+            {200, 600, 1000, 1400},
+            {1000, 800, 600, 400}
+        }
+    \end{lstlisting}
+    
+    Обратите внимание, что указывается размерность одномерных массивов, но не количество этих массивов!
+    
+    \item Инициализировать массив при помощи циклов:
+    \begin{lstlisting}
+        const int rowSize = 3;
+        const int columnSize = 5;
+        int myArray[rowSize][columnSize];
+
+        for (int i = 0; i < rowSize; ++i)
+            for (int j = 0; j < columnSize; ++j)
+                myArray[i][j] = ...;    
+    \end{lstlisting}
+\end{itemize}
+
+Пример инициализированного массива:
+
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+      & 0 & 1 & 2 & 3 \\
+    \hline
+    0 & 24 & 25 & 23 & 22 \\
+    \hline
+    1 & 1 & 2 & 3 & 4 \\
+    \hline
+    2 & 3 & 5 & 7 & 11 \\
+    \hline
+    3 & 10 & 15 & 20 & 25 \\
+    \hline
+    4 & 11 & 22 & 33 & 44 \\
+    \hline
+    5 & 0 & 2 & 4 & 6 \\
+    \hline
+\end{tabular}
