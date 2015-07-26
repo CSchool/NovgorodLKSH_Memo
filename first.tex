@@ -1,7 +1,8 @@
 \section{Введение в С++}
 
-\subsection{Переменные (объявление, операции с переменными)}
+\subsection{Переменные (объявление, типы, операции с переменными)}
 
+\subsubsection{Объявление переменных}
 Синтаксис объявления переменных:
 \lstset{style=CPlusPlus}
 \begin{lstlisting}
@@ -9,7 +10,7 @@
 \end{lstlisting}
 
 \textit{Type} --- тип переменной, \textit{Modification} --- изменение (модификация), накладываемое на переменную, \textit{variableName} --- имя переменной, \textit{variableValue} --- значение переменной.
- 
+
 После объявления переменной имеет смысл назначить ей какое-либо допустимое значение. Даже если переменная будет изменяться в дальнейшем коде программы, правилом хорошего тона является выставления значения по умолчанию, в противном случае при выполнении программы в этих переменных может оказаться <<мусор>> (случайные значения).
 
 Инициализацию переменной можно двумя способами:
@@ -25,6 +26,7 @@
     \end{lstlisting}
 \end{itemize}
 
+\subsubsection{Типы переменных}
 Стандартные типы:
 \begin{enumerate}
     \item \textit{bool} --- логический тип;
@@ -63,11 +65,11 @@
         \hline
         unsigned short int & 2 & $0 \ldots 65 535$ \\
         \hline
-        int & 4 & $-2 147 483 648 \ldots 2 147 483 647$ \\  
+        int & 4 & $-2 147 483 648 \ldots 2 147 483 647$ \\
         \hline
         unsigned int & 4 & $0 \ldots 4 294 967 295$ \\
         \hline
-        long int & 4 & $-2 147 483 648 \ldots 2 147 483 647$ \\  
+        long int & 4 & $-2 147 483 648 \ldots 2 147 483 647$ \\
         \hline
         unsigned long int & 4 & $0 \ldots 4 294 967 295$ \\
         \hline
@@ -88,6 +90,7 @@
     double s,m; // bad thing, because there is no initialization!
 \end{lstlisting}
 
+\subsubsection{Операции с переменными}
 Стандартные арифметические операции над переменными:
 \begin{enumerate}
     \item Операция присваивания ($=$). Значение выражения присваивается переменной:
@@ -158,15 +161,15 @@
     \item Логическое сложение, ИЛИ ($\parallel$). Первое выражение вычисляется всегда, второе вычисляется в том случае, если первое выражение принимает значение \textit{fasle}.
 \end{enumerate}
 
-\subsection{Условный оператор, тернарный оператор, оператор switch}
-
+\subsection{Условный оператор \textit{if}, тернарный оператор, оператор \textit{switch}}
+\subsubsection{Условный оператор \textit{if}}
 Общая структура условного оператора:
 \begin{lstlisting}
     if (expression_1)
     {
         statement_1
     }
-    [else 
+    [else
         statement_2]
 \end{lstlisting}
 
@@ -180,7 +183,7 @@
     int a = 13;
     if (a < 16)
         a = a + 2;
-    
+
     // a = 15
 
     int count = 2;
@@ -189,7 +192,7 @@
         count++;
         age += 5;
     }
-    
+
     // count = 2, age = 15
 \end{lstlisting}
 
@@ -199,7 +202,7 @@
 \begin{lstlisting}
     int a = 5;
     int b = 0;
-    
+
     if (a % 2 == 0)
         b++;
     else
@@ -207,7 +210,7 @@
         a--;
         b--;
     }
-        
+
     // b = -1
 \end{lstlisting}
 
@@ -215,7 +218,7 @@
 
 \begin{lstlisting}
     int age = 15;
-    
+
     if (age <= 3)
         ...
     else if (age > 3 && age <= 7)
@@ -226,6 +229,7 @@
         ...
 \end{lstlisting}
 
+\subsubsection{Тернарный оператор}
 Структура тернарного оператора:
 
 \begin{lstlisting}
@@ -241,6 +245,7 @@
     // a = 3
 \end{lstlisting}
 
+\subsubsection{Оператор \textit{switch}}
 Структура оператора \textit{switch}:
 \begin{lstlisting}
     switch ( expression )
@@ -291,4 +296,120 @@
             ...
             break;
     }
- \end{lstlisting}
+\end{lstlisting}
+ 
+\subsection{Циклы \textit{while}, \textit{do-while}, \textit{for}}
+\subsubsection{Цикл \textit{while}}
+Структура цикла \textit{while}:
+\begin{lstlisting}
+    while (expression)
+    {
+        statement
+    }
+\end{lstlisting}
+ 
+\textit{Expression} --- выражение типа \textit{bool}, задает условие выхода из цикла; \textit{statement}~---~набор операций, которые будут выполняться в цикле (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно). Цикл \textit{while} будет выполняться до тех пор, пока \textit{expression} будет равно \textit{true}. Программа может не войти в тело цикла (то есть выполнить операции в нем), если изначально \textit{expression} будет равен \textit{false}.
+
+Пример:
+
+\begin{lstlisting}
+    int a = 0;
+    int b = 0;
+    while (a < 10)
+    {
+        b *= a*a;
+        a++;
+    }
+\end{lstlisting}
+
+Цикл \textit{while} можно досрочно завершить при помощи оператора $break$ (управление программы перейдет к следующей инструкции):
+
+\begin{lstlisting}
+    
+    char answer = 'v';
+    
+    while (a != 'y')
+    {
+        ...
+        
+        if (answer == 'q')
+            break;
+            
+        ...
+    }
+    
+\end{lstlisting}
+
+В данном примере выход из цикла произойдет в двух случаях: пока переменная \textit{answer} не примет значение \textit{y}, либо значение \textit{q}. Во втором случае все операции после данного условия не будут выполнены и произойдет выход из цикла.
+
+Если использовать оператор \textit{continue} в цикле, то все операции выполняться также не будут, однако цикл не будет завершен и его выполнение будет продолжено с самой первой операции в цикле. 
+
+\subsubsection{Цикл \textit{do-while}}
+Структура цикла \textit{do-while}:
+\begin{lstlisting}
+    do
+    {
+        statement
+    } while (expression);
+\end{lstlisting}
+
+\textit{Expression} --- выражение типа \textit{bool}, задает условие выхода из цикла; \textit{statement}~---~набор операций, которые будут выполняться в цикле (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно). Цикл \textit{do-while} будет выполняться до тех пор, пока выражение \textit{expression} будет равно \textit{true}. В данном цикле блок \textit{statement} будет выполняться в первую очередь, условие выхода из цикла будет проверяться после выполнения операций. Операторы \textit{break} и \textit{continue} имеют такой же эффект, что и в цикле \textit{while}.
+
+Пример:
+\begin{lstlisting}
+    int a = 0;
+    do
+    {
+        a++;
+    } while (a < 10);
+\end{lstlisting}
+
+\subsubsection{Цикл \textit{for}}
+Конструкция цикла \textit{for}:
+\begin{lstlisting}
+    for (init-expression ; cond-expression ; loop-expression)
+    {
+        statement;
+    }
+\end{lstlisting}
+
+Обозначения:
+\begin{itemize}
+    \item \textit{init-expression} --- набор операций, которые выполняются один раз \textbf{до} начала цикла, чаще всего используется для инициализации переменных, которые будут использоваться в цикле для подсчета итераций;
+    \item \textit{cond-expression} --- выражение типа \textit{bool}, которое задает условие выхода из цикла --- проверяется перед каждой итерацией цикла (в том числе и перед самой первой), если \textit{cond-expression} равное \textit{false}, то цикл завершается;
+    \item \textit{loop-expression} --- набор операций, который выполняется после итерации цикла, обычно используется для изменения переменных, который подсчитывают количество итераций;
+    \item \textit{statement} --- набор операций, которые будут производится в каждой итерации цикла (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно).
+\end{itemize}
+  
+Пример:
+
+\begin{lstlisting}
+    int sum = 0;
+    const int lim = 10;
+    
+    for (int i = 0; i < lim; ++i)
+        sum += i;
+\end{lstlisting}
+
+В блоках \textit{init-expression} и \textit{loop-expression} может быть несколько выражений, разделенных запятой:
+\begin{lstlisting}
+    int sum = 0;
+
+    for (int i = 0, int j = 0; i + j < lim; ++i, ++j)
+        sum += i + j;
+\end{lstlisting}
+
+В блоке \textit{loop-expression} переменные, ответственные за количество итераций, могут изменяться по разному:
+\begin{lstlisting}
+    for (int i = 10; i > 0; --i)
+    {
+        ...
+    }
+    
+    for (int k = 0; k > 200; k += 2)
+    {
+        ...
+    }
+\end{lstlisting}
+
+Операторы \textit{break} и \textit{continue} имеют такой же эффект, что и в циклах \textit{while} и \textit{do-while}.
