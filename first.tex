@@ -109,14 +109,14 @@
         int a = 0;
         int b = 0;
         int c = 0;
-        
+
         std::cout << "Enter a:" << std::endl;
         std::cin >> a;
-        
+
         std::cout << "Enter b:" << std::endl;
         std::cin >> b;
-        
-        std::cout << "a + b = " << a + b << std::endl; 
+
+        std::cout << "a + b = " << a + b << std::endl;
     }
 \end{lstlisting}
 
@@ -320,7 +320,7 @@
         \lstinline{?:} & справа налево & условная \\
         \hline
         \lstinline{=} \lstinline{+=} \lstinline{-=} \lstinline{*=} \lstinline{/=} \lstinline{%=} & справа налево & присваивания \\
-        \hline   
+        \hline
         \lstinline{,} & слева направо & запятая \\
         \hline
     \end{tabular}
@@ -686,4 +686,173 @@
     \end{tabular}
 \end{table}
 
-\subsection{Указатели}
+\subsection{Строки}
+\subsubsection{Инициализация строк}
+Для включения строк \texttt{C++} необходимо подключить заголовочный файл \lstinline{<string>}. Сам класс находится в пространстве имен \textbf{std}. Объект \textit{string} можно инициализировать:
+
+\begin{enumerate}
+    \item С помощью конструктора:
+    \begin{lstlisting}
+        string text("Hello");
+        string anotherText(3, 'p'); // "ppp"
+        string emptyString;
+    \end{lstlisting}
+
+    В последнем случае \lstinline{string emptyString} вызывается конструктор по умолчанию, который создает пустую строку
+    \item При помощи оператора \lstinline{=}, который вызывает конструктор:
+    \begin{lstlisting}
+        string month = "August";
+    \end{lstlisting}
+\end{enumerate}
+
+Числа нельзя присваивать напрямую строке:
+\begin{lstlisting}
+    string error = 'c';
+    string anotherError(8);
+\end{lstlisting}
+
+Оператор \lstinline{>>} потока \textit{std::cin} может также работать со строками:
+\begin{lstlisting}
+    string userAnswer;
+    cin >> userAnswer;
+\end{lstlisting}
+
+\subsubsection{Взятие символа строки (\textit{[], at()}), размер строки (\textit{length()})}
+После инициализации строки можно обращаться к отдельным символам строки:
+\begin{enumerate}
+    \item Через оператор \lstinline{[]}:
+    \begin{lstlisting}
+        string student = "Vasya";
+        cout << student[0]; // 'V'
+        cout << student[4]; // 'a'
+
+        student[2] = 'a';
+        cout << student; // "Vaaya"
+    \end{lstlisting}
+    \item Через метод \lstinline{at(int index)} класса \textit{string}:
+    \begin{lstlisting}
+        string student = "Vasya";
+        cout << student.at(0); // 'V'
+        cout << student.at(3); // 'y'
+
+        student.at(0) = 'M';
+        cout << student; // "Masya"
+    \end{lstlisting}
+\end{enumerate}
+
+Индексы, по которым можно обращаться к элементам строки,
+лежат в диапазоне~$\left[ 0 \ldots \text{stringLength} - 1 \right]$.
+
+Размер строки можно узнать с помощью метода \lstinline{length()}:
+\begin{lstlisting}
+    string myString = "abcd";
+    cout << myString.length(); // 4
+\end{lstlisting}
+
+\subsubsection{Присваивание (\textit{assign()}) и конкатенация строк(\textit{append()})}
+
+Возможные варианты присваивания:
+\begin{lstlisting}
+    string str1("test");
+    string str2,str3,str4;
+
+    str2 = str1; // str2 = "test";
+    str3.assign(str1); // str3 = "test";
+\end{lstlisting}
+
+Метод \textit{assign} можно использовать, когда необходимо присвоить \texttt{подстроку}. В таком случае метод принимает дополнительные параметры:
+\begin{lstlisting}
+    assign(source, startIndex, length)
+\end{lstlisting}
+\textit{source}~---~строка типа \textit{string}, из которой будет браться подстрока, \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы. Необходимо, чтобы $\text{\textit{length}} \leqslant \text{\textit{source.length()}} - - \text{\textit{startIndex}}$!
+
+Пример:
+\begin{lstlisting}
+    string str1 = "abcd";
+    string str2;
+    str2.assign(str1, 2, 2); 
+    cout << str2; // str2 = "cd";
+\end{lstlisting}
+
+Возможные варианты конкатенации:
+\begin{lstlisting}
+    string str1("abcd");
+    string str2;
+
+    str2 += str1; // str2 = "abcd";
+    string str3(str1 + str2); // str5 = "abcdabcd"
+
+    string str4 = "zyx";
+    str4.append(str1); // str4 = "zyxabcd";
+\end{lstlisting}
+
+Метод \textit{append} можно использовать, когда необходима конкатенация \texttt{подстроки}. В таком случае метод принимает дополнительные параметры:
+\begin{lstlisting}
+    append(source, startIndex, copyLength)
+\end{lstlisting}
+
+\textit{source}~---~строка типа \textit{string}, из которой будет браться подстрока, \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы. Необходимо, чтобы $\text{\textit{length}} \leqslant \text{\textit{source.length()}} - - \text{\textit{startIndex}}$! 
+
+Пример:
+\begin{lstlisting}
+    string str1 = "abcdfg";
+    string str2 = "111";
+    str2.append(str1, 1, 2);
+    
+    cout << str2; // str2 = "111bc"
+\end{lstlisting}
+
+\subsubsection{Сравнение строк (\textit{compare()})}
+Строки сравниваются лексикографически. Сравнение происходит по первому несовпадающему символу, в противном случае сравниваются длины строк.
+Строки можно сравнивать с помощью операторов \lstinline{==}, \lstinline{>}, \lstinline{<}:
+\begin{lstlisting}
+    string str1("abcd");
+    string str2("Hello");
+    string str3(str2);
+    string str4("zxc");
+    
+    cout << (str1 == str2) << endl; // false (0)
+    cout << (str2 == str3) << endl; // true (1)
+    cout << (str1 < str4) << endl; // true (1)
+    cout << (str1 > str2) << endl; // true (1)
+\end{lstlisting}
+
+Сравнивать строки между собой можно с помощью метода \textit{compare()}. Функция возвращает 0, если строки одинаковы; значение меньше 0, если строка лексикографически меньше или все сопоставимые символы одинаковы, но строка меньше; значение больше 0, если строка лексикографически больше или все сопоставимые символы одинаковы, но строка больше.
+
+Пример:
+
+\begin{lstlisting}
+    string str1("abcd");
+    string str2("Hello");
+    string str3("zxc");
+    string str4("abcdfff");
+    
+    cout << str1.compare(str1) << endl; // 0
+    cout << str1.compare(str2) << endl; // 1
+    cout << str1.compare(str3) << endl; // -1
+    cout << str1.compare(str4) << endl; // -1
+\end{lstlisting}
+
+Метод \textit{compare()} может сравнивать подстроку вызываемой строки с другой строкой:
+\begin{lstlisting}
+    compare(startIndex, length, anotherString)
+\end{lstlisting}
+
+\textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы, \textit{anotherString}~---~строка, с которой будет сравниваться подстрока. Необходимо подбирать \textit{startIndex} и \textit{length} так, чтобы подстрока была корректной.
+
+Пример:
+
+\begin{lstlisting}
+    string str1("abcdefgh");
+    string str2("abcd");
+
+    cout << str1.compare(0, 4, str2) << endl; // 0
+    cout << str2.compare(3, 1, str1) << endl; // 1
+\end{lstlisting}
+
+Метод \textit{compare} может сравнивать подстроку вызываемой строки с подстрокой другой строки
+\begin{lstlisting}
+    compare(startIndex, length, anotherString, anotherStartIndex, anotherLength)
+\end{lstlisting}
+
+\textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы, \textit{anotherString}~---~строка, с которой будет сравниваться подстрока, \textit{anotherStartIndex} и \textit{anotherLength} аналогичны по своим функциям с \textit{startIndex} и \textit{length}.
