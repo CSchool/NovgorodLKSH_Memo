@@ -711,7 +711,7 @@
     std::cin >> userAnswer;
 \end{lstlisting}
 
-\subsubsection{Взятие символа строки (\texttt{[], at()}), размер строки (\texttt{length()})}
+\subsubsection{Взятие символа строки (\texttt{[], at()}), размер строки (\texttt{length(), empty()})}
 После инициализации строки можно обращаться к отдельным символам строки:
 \begin{enumerate}
     \item Через оператор \lstinline|[]|:
@@ -741,6 +741,15 @@
 \begin{lstlisting}
     std::string myString = "abcd";
     std::cout << myString.length(); // 4
+\end{lstlisting}
+
+Для того, чтобы узнать, является ли строка пустой, можно вызывать метод \lstinline|empty()|:
+\begin{lstlisting}
+    std::string nonEmptyString("qew12314");
+    std::string emptyString;
+    
+    std::cout << nonEmptyString.empty() << std::endl; // 0
+    std::cout << emptyString.empty() << std::endl; // 1
 \end{lstlisting}
 
 \subsubsection{Присваивание (\texttt{assign()}) и конкатенация строк(\texttt{append()})}
@@ -800,7 +809,7 @@
 
 \subsubsection{Сравнение строк (\texttt{compare()})}
 Строки сравниваются лексикографически. Сравнение происходит по первому несовпадающему символу, в противном случае сравниваются длины строк.
-Строки можно сравнивать с помощью операторов \lstinline{==}, \lstinline{>}, \lstinline{<}:
+Строки можно сравнивать с помощью операторов \lstinline|==|, \lstinline|>|, \lstinline|<|:
 \begin{lstlisting}
     std::string str1("abcd");
     std::string str2("Hello");
@@ -854,3 +863,106 @@
 \end{lstlisting}
 
 \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы, \textit{anotherString}~---~строка, с которой будет сравниваться подстрока, \textit{anotherStartIndex} и \textit{anotherLength} аналогичны по своим функциям с \textit{startIndex} и \textit{length}. 
+
+\subsubsection{Подстрока (\texttt{substr})}
+С помощью метода \lstinline{substr} можно брать подстроки оригинальной строки:
+
+\lstinline|substr(startIndex, length)|
+
+Пример использования:
+\begin{lstlisting}
+    std::string first("abcdefg");
+    std::string subFirst = first.substr(3, 4); // "defg"
+\end{lstlisting}
+
+\subsubsection{Поиск подстрок и символов (\texttt{find, rfind, find\_first\_of, \\find\_last\_of, find\_first\_not\_of, find\_last\_not\_of})}
+
+Для поиска подстрок необходимо использовать методы \lstinline|find()|, который ведет поиск слева направо, и \lstinline|rfind()|, который ищет справа налево. На вход методы принимают подстроку типа \lstinline|std::string| и возвращают индекс начальной позиции этой подстроки. Если данной подстроки нет, то возвращается \lstinline|string::npos|.
+
+Примеры:
+\begin{lstlisting}
+    std::string str("abcdefghiabc");
+    
+    std::cout << str.find("abc") << std::endl; // 0
+    std::cout << str.find("fg") << std::endl; // 5
+    std::cout << str.rfind("abc") << std::endl; // 9
+    std::cout << str.rfind("zzz") << std::endl; // string::npos
+\end{lstlisting}
+
+Методы \lstinline|find_first_of(), find_last_of(), find_first_not_of(), find_last_not_of()| принимает на вход набор символов в виде \lstinline|std::string| и возвращают индекс первого\textbackslash последнего вхождения\textbackslash отсутствия в зависимости от своей функции, в противном случае методы возвращают \lstinline|string::npos|.
+
+Назначения методов:
+\begin{itemize}
+    \item \lstinline|find_first_of|~---~возвращает индекс первого вхождения любого из символов параметра в строке;
+    \item \lstinline|find_last_of|~---~возвращает индекс последнего вхождения любого из символов параметра в строке;
+    \item \lstinline|find_first_not_of|~---~возвращает индекс первого вхождения любого символа \textbf{не} из символов параметра в строке;
+    \item \lstinline|find_last_not_of|~---~возвращает индекс последнего вхождения любого символа \textbf{не} из символов параметра в строке.
+\end{itemize}
+
+Примеры:
+\begin{lstlisting}
+    std::string str("abcdefghiabc");
+
+    std::cout << str.find_first_of("tree") << std::endl; // 4
+	std::cout << str.find_last_of("cat") << std::endl; // 11
+	std::cout << str.find_first_not_of("father") << std::endl; // 1
+	std::cout << str.find_last_not_of("car") << std::endl; // 10
+\end{lstlisting}
+
+\subsubsection{Удаление символов из строки (\texttt{erase(), clear()})}
+
+При помощи метода \lstinline|erase()| можно удалить $n$--ое количество символов:
+
+\lstinline|erase(index, length)|
+
+\textit{index} указывает индекс с которого необходимо начать удаление, \textit{length} указывает сколько символов необходимо удалить. Если не указывать параметр \textit{length}, то будут удаление будет происходить до конца строки.
+
+Примеры:
+\begin{lstlisting}
+    std::string test("abcdefgh");
+    test.erase(3);
+    std::cout << test << std::endl; // test = "abc"
+    
+    test = "12345678";
+    test.erase(1, 6);
+    std::cout << test << std::endl; // test = "18";
+\end{lstlisting} 
+
+Если необходимо полностью очистить строку, то необходимо использовать метод \lstinline|clear()|:
+\begin{lstlisting}
+    std::string test("1234abcd");
+    std::cout << test.empty() << std::endl; // 0
+    
+    test.clear();
+    std::cout << test.empty() << std::endl; // 1
+\end{lstlisting}
+
+\subsubsection{Замена символов в строке (\texttt{replace()})}
+
+Для замены символов в строке необходимо использовать метод \lstinline|replace()|:
+
+\lstinline|replace(index, length, replaceString)|
+
+\textit{index} указывает с какого индекса в строке необходимо произвести замену, \textit{length} указывает сколько символов необходимо заменить, \textit{replaceString} является строкой, на которую происходит замена.
+
+Пример:
+\begin{lstlisting}
+    std::string test("1234abcd");
+    test.replace(4, 4, "5678");
+    std::cout << test << std::endl; 
+    // test = "12345678"
+\end{lstlisting}
+
+\subsubsection{Вставка символов в строку(\texttt{insert()})}
+Для вставки символов в строку необходимо использовать метод \lstinline|insert()|:
+
+\lstinline|insert(index, insertString)|
+
+\textit{index} указывает индекс, с которого необходимо сделать вставку, \textit{insertString} является строкой, которую необходимо вставить.
+
+Пример:
+\begin{lstlisting}
+    std::string test("14");
+    test.insert(1, "23");
+    std::cout << test << std::endl; // "1234"
+\end{lstlisting}
