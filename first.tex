@@ -17,7 +17,7 @@
     }
 \end{lstlisting}
 
-В данном примере представлена функций \textit{main}, которая является точкой входа программы. Может быть сколько угодно функций в программе, но функция \textit{main} обязана присутствовать среди них, причем в единственном экземпляре! Исполнение всей программы начинается именно с этой функции. \textit{Int} перед названием функции говорит о том, что данная функция должна вернуть целочисленное значение. В контексте данной функции \textit{main} возвращает результат выполнения программы~---~\textit{return 0} означает, что программа выполнилась без ошибки и корректно завершила свою работу. В противном случае необходимо вернуть ненулевое значение.
+В данном примере представлена функций \textit{main}, которая является точкой входа программы. Может быть сколько угодно функций в программе, но функция \textit{main} обязана присутствовать среди них, причем в единственном экземпляре! Исполнение всей программы начинается именно с этой функции. \textit{int} перед названием функции говорит о том, что данная функция должна вернуть целочисленное значение. \textit{main} возвращает результат выполнения программы~---~\textit{return 0} означает, что программа выполнилась без ошибки и корректно завершила свою работу. В противном случае необходимо вернуть ненулевое значение.
 
 Обратите внимание, что при помощи $//$ можно комментировать программу~---~то есть на данной строке ничего выполняться не будет. Комментарий можно растянуть на несколько линий, обрамив его между $/*$ и $*/$. Примеры комментариев представлены в коде сверху.
 
@@ -38,19 +38,19 @@
 В данной программе, по отношению к предыдущей, добавились две строчки:
 
 \begin{itemize}
-    \item \#include <iostream>
-    \item std::cout << "Hello, world!" << std::endl;
+    \item \lstinline!\#include <iostream>!
+    \item \lstinline|std::cout << "Hello, world!" << std::endl;|
 \end{itemize}
 
-\textit{\#include <iostream>} является директивой (командой) препроцессора. Данные строки обрабатываются им \texttt{до} компиляции программы. Данная команда позволяет препроцессору включить в программу содержимое заголовочного файла \textit{iostream}, который отвечает за работу потоков ввода\textbackslash вывода. Данный файл необходимо включать в любую программу, где ожидается работа с консолью~---~когда данные считываются с консоли и когда необходимо передать какие-нибудь данные консоли.
+\lstinline!#include <iostream>! является директивой (командой) препроцессора. Данные строки обрабатываются им \emph{до} компиляции программы. Данная команда позволяет препроцессору включить в программу содержимое заголовочного файла \lstinline!iostream!, который отвечает за работу потоков ввода\textbackslash вывода. Данный файл необходимо включать в любую программу, где ожидается работа с консолью~---~когда данные считываются с консоли и когда необходимо передать какие-нибудь данные консоли.
 
-Вся строка \textit{std::cout << "Hello, world!" << std::endl;} является оператором. Каждый оператор в языке оканчивается символом $;$.
+Вся строка \lstinline|std::cout << "Hello, world!" << std::endl;| является оператором. Каждый оператор в языке оканчивается символом $;$.
 
 Ввод\textbackslash вывод в С++ осуществляется с помощью символьных потоков:
 \begin{itemize}
-    \item \textit{std::cin}~---~стандартный входной поток;
-    \item \textit{std::out}~---~стандартный выходной поток;
-    \item \textit{std::err}~---~стандартный поток ошибок.
+    \item \lstinline!std::cin!~---~стандартный входной поток;
+    \item \lstinline!std::out!~---~стандартный выходной поток;
+    \item \lstinline!std::err!~---~стандартный поток ошибок.
 \end{itemize}
 
 Обратите внимание, что перед \textit{cin, out} и \textit{err} помещено \texttt{std::}. Это означает, что данные потоки принадлежат \textit{пространству имен} (\textit{namespace}) \texttt{std}. Пространства имен нужны для удобной организации объектов и операторов по смыслу.
@@ -87,7 +87,7 @@
 
 Рекомендуется использовать второй метод, если количество объявлений не очень большое, в противном случае не возбраняется подключать все пространство имен.
 
-Записывать в стандартный выходной поток можно не только строки, но и другие типы данных:
+Записывать в стандартный выходной поток можно не только строки, но и данные других типов:
 
 \begin{lstlisting}
     #include <iostream>
@@ -488,7 +488,7 @@
     }
 \end{lstlisting}
 
-Цикл \textit{while} можно досрочно завершить при помощи оператора $break$ (управление программы перейдет к следующей инструкции):
+Цикл \textit{while} можно досрочно завершить при помощи оператора \lstinline$break$ (управление программы перейдет к следующей инструкции):
 
 \begin{lstlisting}
 
@@ -693,28 +693,28 @@
 \begin{enumerate}
     \item С помощью конструктора:
     \begin{lstlisting}
-        string text("Hello");
-        string anotherText(3, 'p'); // "ppp"
-        string emptyString;
+        std::string text("Hello");
+        std::string anotherText(3, 'p'); // "ppp"
+        std::string emptyString;
     \end{lstlisting}
 
-    В последнем случае \lstinline{string emptyString} вызывается конструктор по умолчанию, который создает пустую строку
+    В последнем случае \lstinline{std::string emptyString} вызывается конструктор по умолчанию, который создает пустую строку
     \item При помощи оператора \lstinline{=}, который вызывает конструктор:
     \begin{lstlisting}
-        string month = "August";
+        std::string month = "August";
     \end{lstlisting}
 \end{enumerate}
 
 Числа нельзя присваивать напрямую строке:
 \begin{lstlisting}
-    string error = 'c';
-    string anotherError(8);
+    std::string error = 'c';
+    std::string anotherError(8);
 \end{lstlisting}
 
 Оператор \lstinline{>>} потока \textit{std::cin} может также работать со строками:
 \begin{lstlisting}
-    string userAnswer;
-    cin >> userAnswer;
+    std::string userAnswer;
+    std::cin >> userAnswer;
 \end{lstlisting}
 
 \subsubsection{Взятие символа строки (\textit{[], at()}), размер строки (\textit{length()})}
@@ -722,21 +722,21 @@
 \begin{enumerate}
     \item Через оператор \lstinline{[]}:
     \begin{lstlisting}
-        string student = "Vasya";
-        cout << student[0]; // 'V'
-        cout << student[4]; // 'a'
+        std::string student = "Vasya";
+        std::cout << student[0]; // 'V'
+        std::cout << student[4]; // 'a'
 
         student[2] = 'a';
-        cout << student; // "Vaaya"
+        std::cout << student; // "Vaaya"
     \end{lstlisting}
     \item Через метод \lstinline{at(int index)} класса \textit{string}:
     \begin{lstlisting}
-        string student = "Vasya";
-        cout << student.at(0); // 'V'
-        cout << student.at(3); // 'y'
+        std::string student = "Vasya";
+        std::cout << student.at(0); // 'V'
+        std::cout << student.at(3); // 'y'
 
         student.at(0) = 'M';
-        cout << student; // "Masya"
+        std::cout << student; // "Masya"
     \end{lstlisting}
 \end{enumerate}
 
@@ -745,16 +745,16 @@
 
 Размер строки можно узнать с помощью метода \lstinline{length()}:
 \begin{lstlisting}
-    string myString = "abcd";
-    cout << myString.length(); // 4
+    std::string myString = "abcd";
+    std::cout << myString.length(); // 4
 \end{lstlisting}
 
 \subsubsection{Присваивание (\textit{assign()}) и конкатенация строк(\textit{append()})}
 
 Возможные варианты присваивания:
 \begin{lstlisting}
-    string str1("test");
-    string str2,str3,str4;
+    std::string str1("test");
+    std::string str2,str3,str4;
 
     str2 = str1; // str2 = "test";
     str3.assign(str1); // str3 = "test";
@@ -764,57 +764,61 @@
 \begin{lstlisting}
     assign(source, startIndex, length)
 \end{lstlisting}
-\textit{source}~---~строка типа \textit{string}, из которой будет браться подстрока, \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы. Необходимо, чтобы $\text{\textit{length}} \leqslant \text{\textit{source.length()}} - - \text{\textit{startIndex}}$!
+\textit{source}~---~строка типа \textit{string}, из которой будет браться подстрока, \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы. 
+Необходимо, чтобы выполнялось условие~$length \leqslant source.length() - startIndex$.
 
 Пример:
 \begin{lstlisting}
-    string str1 = "abcd";
-    string str2;
+    std::string str1 = "abcd";
+    std::string str2;
     str2.assign(str1, 2, 2); 
-    cout << str2; // str2 = "cd";
+    std::cout << str2; // str2 = "cd";
 \end{lstlisting}
 
 Возможные варианты конкатенации:
 \begin{lstlisting}
-    string str1("abcd");
-    string str2;
+    std::string str1("abcd");
+    std::string str2;
 
     str2 += str1; // str2 = "abcd";
-    string str3(str1 + str2); // str5 = "abcdabcd"
+    std::string str3(str1 + str2); // str5 = "abcdabcd"
 
-    string str4 = "zyx";
+    std::string str4 = "zyx";
     str4.append(str1); // str4 = "zyxabcd";
 \end{lstlisting}
 
 Метод \textit{append} можно использовать, когда необходима конкатенация \texttt{подстроки}. В таком случае метод принимает дополнительные параметры:
 \begin{lstlisting}
-    append(source, startIndex, copyLength)
+    append(source, startIndex, length)
 \end{lstlisting}
 
-\textit{source}~---~строка типа \textit{string}, из которой будет браться подстрока, \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы. Необходимо, чтобы $\text{\textit{length}} \leqslant \text{\textit{source.length()}} - - \text{\textit{startIndex}}$! 
+\textit{source}~---~строка типа \textit{string}, из которой будет браться подстрока, \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы. 
+Необходимо, чтобы выполнялось условие~$length \leqslant source.length() - startIndex$.
 
 Пример:
 \begin{lstlisting}
-    string str1 = "abcdfg";
-    string str2 = "111";
+    std::string str1 = "abcdfg";
+    std::string str2 = "111";
     str2.append(str1, 1, 2);
     
-    cout << str2; // str2 = "111bc"
+    std::cout << str2; // str2 = "111bc"
 \end{lstlisting}
 
 \subsubsection{Сравнение строк (\textit{compare()})}
 Строки сравниваются лексикографически. Сравнение происходит по первому несовпадающему символу, в противном случае сравниваются длины строк.
 Строки можно сравнивать с помощью операторов \lstinline{==}, \lstinline{>}, \lstinline{<}:
 \begin{lstlisting}
-    string str1("abcd");
-    string str2("Hello");
-    string str3(str2);
-    string str4("zxc");
+    std::string str1("abcd");
+    std::string str2("Hello");
+    std::string str3(str2);
+    std::string str4("zxc");
+    std::string str5("zxcd");
     
-    cout << (str1 == str2) << endl; // false (0)
-    cout << (str2 == str3) << endl; // true (1)
-    cout << (str1 < str4) << endl; // true (1)
-    cout << (str1 > str2) << endl; // true (1)
+    std::cout << (str1 == str2) << endl; // false (0)
+    std::cout << (str2 == str3) << endl; // true (1)
+    std::cout << (str1 < str4) << endl; // true (1)
+    std::cout << (str1 > str2) << endl; // true (1)
+    std::cout << (str4 > str5) << endl; // false (0)
 \end{lstlisting}
 
 Сравнивать строки между собой можно с помощью метода \textit{compare()}. Функция возвращает 0, если строки одинаковы; значение меньше 0, если строка лексикографически меньше или все сопоставимые символы одинаковы, но строка меньше; значение больше 0, если строка лексикографически больше или все сопоставимые символы одинаковы, но строка больше.
@@ -822,15 +826,15 @@
 Пример:
 
 \begin{lstlisting}
-    string str1("abcd");
-    string str2("Hello");
-    string str3("zxc");
-    string str4("abcdfff");
+    std::string str1("abcd");
+    std::string str2("Hello");
+    std::string str3("zxc");
+    std::string str4("abcdfff");
     
-    cout << str1.compare(str1) << endl; // 0
-    cout << str1.compare(str2) << endl; // 1
-    cout << str1.compare(str3) << endl; // -1
-    cout << str1.compare(str4) << endl; // -1
+    std::cout << str1.compare(str1) << endl; // 0
+    std::cout << str1.compare(str2) << endl; // 1
+    std::cout << str1.compare(str3) << endl; // -1
+    std::cout << str1.compare(str4) << endl; // -1
 \end{lstlisting}
 
 Метод \textit{compare()} может сравнивать подстроку вызываемой строки с другой строкой:
@@ -843,11 +847,11 @@
 Пример:
 
 \begin{lstlisting}
-    string str1("abcdefgh");
-    string str2("abcd");
+    std::string str1("abcdefgh");
+    std::string str2("abcd");
 
-    cout << str1.compare(0, 4, str2) << endl; // 0
-    cout << str2.compare(3, 1, str1) << endl; // 1
+    std::cout << str1.compare(0, 4, str2) << endl; // 0
+    std::cout << str2.compare(3, 1, str1) << endl; // 1
 \end{lstlisting}
 
 Метод \textit{compare} может сравнивать подстроку вызываемой строки с подстрокой другой строки
