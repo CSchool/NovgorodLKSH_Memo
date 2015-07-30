@@ -5,16 +5,16 @@
 
 \lstset{style=CPlusPlus}
 \begin{lstlisting}
-    int main()
-    {
-        // nothing interesting in this program...
+int main()
+{
+    // nothing interesting in this program...
 
-        /*
-            Seriously, we doesn't have even message about Hello World!
-            I hope that we fix this in another section...
-        */
-        return 0;
-    }
+    /*
+        Seriously, we doesn't have even message about Hello World!
+        I hope that we fix this in another section...
+    */
+    return 0;
+}
 \end{lstlisting}
 
 В данном примере представлена функций \lstinline|main|, которая является точкой входа программы. Может быть сколько угодно функций в программе, но функция \lstinline|main| обязана присутствовать среди них, причем в единственном экземпляре! Исполнение всей программы начинается именно с этой функции. \lstinline|int| перед названием функции говорит о том, что данная функция должна вернуть целочисленное значение. \lstinline|main| возвращает результат выполнения программы~---~\lstinline|return 0| означает, что программа выполнилась без ошибки и корректно завершила свою работу. В противном случае необходимо вернуть ненулевое значение.
@@ -26,13 +26,13 @@
 Усложним программу, добавив вывод строки <<Hello, world!>> на экран консольного приложения:
 
 \begin{lstlisting}
-    #include <iostream>
+#include <iostream>
 
-    int main()
-    {
-        std::cout << "Hello, world!" << std::endl;
-        return 0;
-    }
+int main()
+{
+    std::cout << "Hello, world!" << std::endl;
+    return 0;
+}
 \end{lstlisting}
 
 В данной программе, по отношению к предыдущей, добавились две строчки:
@@ -49,39 +49,39 @@
 Ввод\textbackslash вывод в С++ осуществляется с помощью символьных потоков:
 \begin{itemize}
     \item \lstinline!std::cin!~---~стандартный входной поток;
-    \item \lstinline!std::out!~---~стандартный выходной поток;
-    \item \lstinline!std::err!~---~стандартный поток ошибок.
+    \item \lstinline!std::cout!~---~стандартный выходной поток;
+    \item \lstinline!std::cerr!~---~стандартный поток ошибок.
 \end{itemize}
 
-Обратите внимание, что перед \lstinline|cin, out| и \lstinline|err| помещено \texttt{std::}. Это означает, что данные потоки принадлежат \textit{пространству имен} (\textit{namespace}) \texttt{std}. Пространства имен нужны для удобной организации объектов и операторов по смыслу.
+Обратите внимание, что перед \lstinline|cin|, \lstinline|cout| и \lstinline|cerr| помещено \texttt{std::}. Это означает, что данные потоки принадлежат \textit{пространству имен} (\textit{namespace}) \texttt{std}. Пространства имен нужны для удобной организации объектов и операторов по смыслу.
 
-Операция $<<$ называется $\textit{операцией передачи в поток}$. При выполнении этой операции то, что стоит справа, передается в поток, который стоит слева. Обратите внимание на направленность данной операции~---~данные передаются в поток справа налево! \lstinline|std::endl| является функцией, которая возвращает символ перевода на новую строчку.
+Операция \lstinline|<<| называется \emph{операцией передачи в поток}. При выполнении этой операции то, что стоит справа, передается в поток, который стоит слева. Обратите внимание на направленность данной операции~---~данные передаются в поток справа налево! \lstinline|std::endl| является функцией, которая возвращает символ перевода на новую строчку.
 
 Для того, чтобы постоянно не использовать в коде определенное пространство имен, можно воспользоваться двумя методами:
 \begin{enumerate}
     \item Использовать для текущей файла всё пространство имен целиком:
     \begin{lstlisting}
-        #include <iostream>
-        using namespace std;
+#include <iostream>
+using namespace std;
 
-        int main()
-        {
-            cout << "Hello, world!" << endl;
-            return 0;
-        }
+int main()
+{
+    cout << "Hello, world!" << endl;
+    return 0;
+}
     \end{lstlisting}
 
     \item Вынести отдельные объекты и операции:
     \begin{lstlisting}
-        #include <iostream>
-        using std::cout;
-        using std::endl;
+#include <iostream>
+using std::cout;
+using std::endl;
 
-        int main()
-        {
-            cout << "Hello, world!" << endl;
-            return 0;
-        }
+int main()
+{
+    cout << "Hello, world!" << endl;
+    return 0;
+}
     \end{lstlisting}
 \end{enumerate}
 
@@ -90,34 +90,34 @@
 Записывать в стандартный выходной поток можно не только строки, но и данные других типов:
 
 \begin{lstlisting}
-    #include <iostream>
-    int main()
-    {
-        int a = 5;
-        int b = 7;
-        std::cout << a + b << std::endl;
-    }
+#include <iostream>
+int main()
+{
+    int a = 5;
+    int b = 7;
+    std::cout << a + b << std::endl;
+}
 \end{lstlisting}
 
 \subsection{Чтение данных с консоли}
 
 С помощью потока \textit{std::cin} можно считывать данные, которые вводятся с консоли:
 \begin{lstlisting}
-    #include <iostream>
-    int main()
-    {
-        int a = 0;
-        int b = 0;
-        int c = 0;
+#include <iostream>
+int main()
+{
+    int a = 0;
+    int b = 0;
+    int c = 0;
 
-        std::cout << "Enter a:" << std::endl;
-        std::cin >> a;
+    std::cout << "Enter a:" << std::endl;
+    std::cin >> a;
 
-        std::cout << "Enter b:" << std::endl;
-        std::cin >> b;
+    std::cout << "Enter b:" << std::endl;
+    std::cin >> b;
 
-        std::cout << "a + b = " << a + b << std::endl;
-    }
+    std::cout << "a + b = " << a + b << std::endl;
+}
 \end{lstlisting}
 
 Операция $<<$ называется \textit{операцией извлечения из потока}. При выполнении данной операции данные из стандартного входного потока слева будут переданы переменной, которая находится справа.
@@ -147,8 +147,8 @@
 
 На одной строке можно объявлять несколько переменных одного типа:
 \begin{lstlisting}
-    int p = 2,k = 3;
-    double s,m; // bad thing, because there is no initialization!
+int p = 2,k = 3;
+double s,m; // bad thing, because there is no initialization!
 \end{lstlisting}
 
 \subsubsection{Типы переменных}
@@ -165,8 +165,8 @@
 \begin{enumerate}
     \item \lstinline|const| --- запрет менять значение переменной в ходе программы. Если попытаться поменять где-нибудь константу, то компилятор сообщит о ошибке:
     \begin{lstlisting}
-        const double pi = 3.1415;
-        pi = 3.0; // This is wrong!!!
+const double pi = 3.1415;
+pi = 3.0; // This is wrong!!!
     \end{lstlisting}
     \item \lstinline|unsigned| --- переменная будет принимать только положительные значения;
     \item \lstinline|short|--- укорачивает диапазон переменных;
@@ -216,21 +216,21 @@
 \begin{enumerate}
     \item Операция присваивания (\lstinline{=}). Значение выражения присваивается переменной:
     \begin{lstlisting}
-       int a = 5;
-       int b = 42; // a = 5, b = 42
-       a = b; // a = 42, b = 42
+int a = 5;
+int b = 42; // a = 5, b = 42
+a = b; // a = 42, b = 42
     \end{lstlisting}
     \item Операция сложения (\lstinline{+}), вычитания (\lstinline{-}), умножения (\lstinline{*}), целочисленное деление (\lstinline{/}), взятие остатка по модулю (\lstinline{%}):
     \begin{lstlisting}
-        int a = 5;
-        int b = 3;
+int a = 5;
+int b = 3;
 
-        int l = 5 + 3 - 1; // l = 7
-        int c = a + b; // c = 8
-        int d = a - b; // d = 2
-        int k = a * b; // k = 15
-        int div = a / b; // div = 1
-        int mod = a % b; // mod = 2
+int l = 5 + 3 - 1; // l = 7
+int c = a + b; // c = 8
+int d = a - b; // d = 2
+int k = a * b; // k = 15
+int div = a / b; // div = 1
+int mod = a % b; // mod = 2
     \end{lstlisting}
 
     Первоначально обрабатываются операции умножения, деления и взятия остатка по модулю. Если операций несколько, то выполняются слева направо. После этих операций по такому же принципу обрабатываются и операции сложения и вычитания.
@@ -240,11 +240,11 @@
 
 Существуют короткие формы записей арифметических операций:
 \begin{lstlisting}
-    a += b --> a = a + b
-    a -= b --> a = a - b
-    a *= b --> a = a * b
-    a /= b --> a = a / b
-    a %= b --> a = a % b
+a += b --> a = a + b
+a -= b --> a = a - b
+a *= b --> a = a * b
+a /= b --> a = a / b
+a %= b --> a = a % b
 \end{lstlisting}
 
 В \texttt{С++} существуют операции инкремента (\lstinline{++}) и декремента (\lstinline{--}). Данные операции увеличивают или уменьшают значение переменной на 1. Различают префиксную форму (\lstinline{++a}\textbackslash \lstinline{--b}) и суффиксную (постфиксную) форму (\lstinline{a++}\textbackslash \lstinline{b--}). Различие между формами в том, что при использовании префиксной формы значение переменной изменяется сразу же, как программа выполняет данную операцию; в суффиксной --- программа сперва использует старое значение, а потом изменяет его.
@@ -254,21 +254,21 @@
     \item Операция равенства (\lstinline{==}). Принимает значение \textbf{true}, если оба выражения равны, в противном случае --- \textbf{false}. \textit{Не следует путать с присваиванием значения переменной!!!}
 
     \begin{lstlisting}
-        bool result = 4 % 2 == 0; // true
+bool result = 4 % 2 == 0; // true
 
-        int a = 5;
-        int b = 2;
-        bool newResult = a == b; // false
+int a = 5;
+int b = 2;
+bool newResult = a == b; // false
     \end{lstlisting}
 
     \item Операция неравенства (\lstinline{!=}). Принимает значение \textbf{true}, если оба выражения различны, в противном случае --- \textbf{false};
     \item Операции отношения (\lstinline{>}, \lstinline{<}, \lstinline{>=}, \lstinline{<=}). Возвращают значение типа \textit{bool} в зависимости от своей функции:
 
     \begin{lstlisting}
-        bool a = 5 > 3; // true
-        bool b = 4 < 2; // false
-        bool c = 6 <= 6; // true
-        bool d = 5 >= 2; // true
+bool a = 5 > 3; // true
+bool b = 4 < 2; // false
+bool c = 6 <= 6; // true
+bool d = 5 >= 2; // true
     \end{lstlisting}
 \end{enumerate}
 
@@ -327,10 +327,10 @@
 \subsubsection{Условный оператор \texttt{if}}
 Общая структура условного оператора:
 \begin{lstlisting}
-    if (expression_1)
-        statement_1
-    [else
-        statement_2]
+if (expression_1)
+    statement_1
+[else
+    statement_2]
 \end{lstlisting}
 
 \textit{expression} --- логическое выражение; \textit{statement\_X} --- выполняемая операция.
@@ -340,53 +340,53 @@
 Пример условия:
 
 \begin{lstlisting}
-    int a = 13;
-    if (a < 16)
-        a = a + 2;
+int a = 13;
+if (a < 16)
+    a = a + 2;
 
-    // a = 15
+// a = 15
 
-    int count = 2;
-    if (count > 3)
-    {
-        count++;
-        age += 5;
-    }
+int count = 2;
+if (count > 3)
+{
+    count++;
+    age += 5;
+}
 
-    // count = 2, age = 15
+// count = 2, age = 15
 \end{lstlisting}
 
 Если необходимо выполнить набор действий в том случае, когда выражение ложно, то необходимо поставить ключевое слово \lstinline|else| и перечислить набор операций (если операция одна, то фигурные скобки можно опустить, в противном случае они обязательны). Если условие не предполагает действий в том случае, если выражение в скобках ложно, то нет необходимости ставить \lstinline|else|.
 
 Пример:
 \begin{lstlisting}
-    int a = 5;
-    int b = 0;
+int a = 5;
+int b = 0;
 
-    if (a % 2 == 0)
-        b++;
-    else
-    {
-        a--;
-        b--;
-    }
+if (a % 2 == 0)
+    b++;
+else
+{
+    a--;
+    b--;
+}
 
-    // b = -1
+// b = -1
 \end{lstlisting}
 
 Допускается использования нескольких блоков \lstinline|if| \ldots \lstinline|else|:
 
 \begin{lstlisting}
-    int age = 15;
+int age = 15;
 
-    if (age <= 3)
-        ...
-    else if (age > 3 && age <= 7)
-        ...
-    else if (age > 7 && age <= 18)
-        ...
-    else
-        ...
+if (age <= 3)
+    ...
+else if (age > 3 && age <= 7)
+    ...
+else if (age > 7 && age <= 18)
+    ...
+else
+    ...
 \end{lstlisting}
 
 \subsubsection{Тернарный оператор}
@@ -396,52 +396,55 @@
 Структура тернарного оператора:
 
 \begin{lstlisting}
-    expression ? statement_1 : statement_2;
+expression ? statement_1 : statement_2;
 \end{lstlisting}
 
-В данном операторе сперва вычисляется выражение \textit{expression}. Если данное выражение принимает значение \lstinline|true|, то идет выполнение того, что написано в \textit{statement\_1}, в противном случае выполняется \textit{statement\_2}.
+Оператор сначала вычисляет выражение \lstinline{expression}.
+Если это выражение принимает значение \lstinline|true|,
+то результатом выполнения всего оператора будет \lstinline|statement_1|, 
+а в противном случае~---~\lstinline|statement_2|.
 
 Пример:
 \begin{lstlisting}
-    int a = 3, b = 5;
-    int min = a < b ? a : b;
-    // a = 3
+int a = 3, b = 5;
+int min = a < b ? a : b;
+// a = 3
 \end{lstlisting}
 
 \subsubsection{Оператор \texttt{switch}}
 Структура оператора \lstinline|switch|:
 \begin{lstlisting}
-    switch ( expression )
-    {
-        case constant-expression : statement
-        [default   : statement]
-    }
+switch ( expression )
+{
+    case constant-expression : statement
+    [default   : statement]
+}
 \end{lstlisting}
 
 \textit{expression} --- выражение, которое можно привести к целочисленному типу; \textit{constant-expression} --- константное значение, если выражение будет иметь данное значение, то произойдет обработка блока \textit{statement}. Если ни один из \lstinline|case|'ов не сработал, то вычисляется \textit{statement} в блоке \lstinline|default|, однако данный блок не обязателен к указанию и может быть опущен --- в таком случаю программа перейдет к выполнению следующих инструкций после оператора \lstinline|switch|.
 
 Пример использования:
 \begin{lstlisting}
-    int month = 4;
-    switch (month)
-    {
-        case 1:
-            ...
-            break;
-        case 2:
-            ...
-            break;
+int month = 4;
+switch (month)
+{
+    case 1:
         ...
-        case 4:
-            ...
-            break;
+        break;
+    case 2:
         ...
-        case 12:
-            ...
-            break;
-        default:
-            ...
-    }
+        break;
+    ...
+    case 4:
+        ...
+        break;
+    ...
+    case 12:
+        ...
+        break;
+    default:
+        ...
+}
 \end{lstlisting}
 
 В данном примере будут выполняться инструкции, которые идут в блоке \lstinline|case 4:|. Обратите внимание, что после окончания инструкций в блоке стоит оператор \lstinline|break|~---~он необходим для прекращения работы оператора \lstinline|switch| после выполнения команд в блоке, в противном случае оператор \lstinline|switch| будет продолжать свою работу!
@@ -449,26 +452,26 @@
 Существует возможность указания нескольких \lstinline|case|'ов для одного и того же блока команд:
 
 \begin{lstlisting}
-    char answer = 'y';
-    switch (answer)
-    {
-        case 'y':
-        case 'Y':
-            ...
-            break;
-        case 'n':
-        case 'N':
-            ...
-            break;
-    }
+char answer = 'y';
+switch (answer)
+{
+    case 'y':
+    case 'Y':
+        ...
+        break;
+    case 'n':
+    case 'N':
+        ...
+        break;
+}
 \end{lstlisting}
 
 \subsection{Циклы \texttt{while}, \texttt{do-while}, \texttt{for}}
 \subsubsection{Цикл с предусловием (\texttt{while})}
 Структура цикла \lstinline|while|:
 \begin{lstlisting}
-    while (expression)
-        statement
+while (expression)
+    statement
 \end{lstlisting}
 
 \textit{Expression} --- выражение типа \lstinline|bool|, задает условие выхода из цикла; \textit{statement}~---~набор операций, которые будут выполняться в цикле (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно). Цикл \lstinline|while| будет выполняться до тех пор, пока \textit{expression} будет равно \lstinline|true|. Программа может не войти в тело цикла (то есть выполнить операции в нем), если изначально \textit{expression} будет равен \lstinline|false|.
@@ -476,30 +479,30 @@
 Пример:
 
 \begin{lstlisting}
-    int a = 0;
-    int b = 0;
-    while (a < 10)
-    {
-        b *= a*a;
-        a++;
-    }
+int a = 0;
+int b = 0;
+while (a < 10)
+{
+    b *= a*a;
+    a++;
+}
 \end{lstlisting}
 
 Цикл \lstinline|while| можно досрочно завершить при помощи оператора \lstinline|break| (управление программы перейдет к следующей инструкции):
 
 \begin{lstlisting}
 
-    char answer = 'v';
+char answer = 'v';
 
-    while (a != 'y')
-    {
-        ...
+while (a != 'y')
+{
+    ...
 
-        if (answer == 'q')
-            break;
+    if (answer == 'q')
+        break;
 
-        ...
-    }
+    ...
+}
 
 \end{lstlisting}
 
@@ -510,28 +513,28 @@
 \subsubsection{Цикл с постусловием (\texttt{do-while})}
 Структура цикла \lstinline|do-while|:
 \begin{lstlisting}
-    do
-        statement
-    while (expression);
+do
+    statement
+while (expression);
 \end{lstlisting}
 
 \textit{Expression} --- выражение типа \lstinline|bool|, задает условие выхода из цикла; \textit{statement}~---~набор операций, которые будут выполняться в цикле (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно). Цикл \lstinline|do-while| будет выполняться до тех пор, пока выражение \textit{expression} будет равно \lstinline|true|. В данном цикле блок \textit{statement} будет выполняться в первую очередь, условие выхода из цикла будет проверяться после выполнения операций. Операторы \lstinline|break| и \lstinline|continue| имеют такой же эффект, что и в цикле \lstinline|while|.
 
 Пример:
 \begin{lstlisting}
-    int a = 0;
-    do
-    {
-        a++;
-    }
-    while (a < 10);
+int a = 0;
+do
+{
+    a++;
+}
+while (a < 10);
 \end{lstlisting}
 
 \subsubsection{Цикл со счетчиком (\texttt{for})}
 Конструкция цикла \lstinline|for|:
 \begin{lstlisting}
-    for (init-expression ; cond-expression ; loop-expression)
-        statement
+for (init-expression ; cond-expression ; loop-expression)
+    statement
 \end{lstlisting}
 
 Обозначения:
@@ -545,33 +548,33 @@
 Пример:
 
 \begin{lstlisting}
-    int sum = 0;
-    const int lim = 10;
+int sum = 0;
+const int lim = 10;
 
-    for (int i = 0; i < lim; ++i)
-        sum += i;
+for (int i = 0; i < lim; ++i)
+    sum += i;
 \end{lstlisting}
 
 В блоках \textit{init-expression} и \textit{loop-expression} может быть несколько выражений, разделенных запятой:
 \begin{lstlisting}
-    int sum = 0;
+int sum = 0;
 
-    for (int i = 0, j = 0; i + j < lim; ++i, ++j)
-        sum += i + j;
+for (int i = 0, j = 0; i + j < lim; ++i, ++j)
+    sum += i + j;
 \end{lstlisting}
 
 В блоке \textit{loop-expression} переменные, ответственные за количество
 итераций, могут изменяться по-разному:
 \begin{lstlisting}
-    for (int i = 10; i > 0; --i)
-    {
-        ...
-    }
+for (int i = 10; i > 0; --i)
+{
+    ...
+}
 
-    for (int k = 0; k > 200; k += 2)
-    {
-        ...
-    }
+for (int k = 0; k > 200; k += 2)
+{
+    ...
+}
 \end{lstlisting}
 
 Операторы \lstinline|break| и \lstinline|continue| имеют такой же эффект, что и в циклах \lstinline|while| и \lstinline|do-while|.
@@ -603,11 +606,11 @@
     
     \item Инициализировать массив при помощи циклов:
     \begin{lstlisting}
-        const int arraySize = 5;
-        int myArray[arraySize];
+const int arraySize = 5;
+int myArray[arraySize];
 
-        for (int i = 0; i < arraySize; ++i)
-            myArray[i] = ...;
+for (int i = 0; i < arraySize; ++i)
+    myArray[i] = ...;
     \end{lstlisting}
 \end{itemize}
 
@@ -636,25 +639,25 @@
 \begin{itemize}
     \item Использовать инициализатор \{\} при объявлении массива:
     \begin{lstlisting}
-        int example[][5] =
-        {
-            {100, 200, 300, 400},
-            {200, 600, 1000, 1400},
-            {1000, 800, 600, 400}
-        }
+int example[][5] =
+{
+    {100, 200, 300, 400},
+    {200, 600, 1000, 1400},
+    {1000, 800, 600, 400}
+}
     \end{lstlisting}
 
     Обратите внимание, что указывается размерность одномерных массивов, но не количество этих массивов!
 
     \item Инициализировать массив при помощи циклов:
     \begin{lstlisting}
-        const int rowSize = 3;
-        const int columnSize = 5;
-        int myArray[rowSize][columnSize];
+const int rowSize = 3;
+const int columnSize = 5;
+int myArray[rowSize][columnSize];
 
-        for (int i = 0; i < rowSize; ++i)
-            for (int j = 0; j < columnSize; ++j)
-                myArray[i][j] = ...;
+for (int i = 0; i < rowSize; ++i)
+    for (int j = 0; j < columnSize; ++j)
+        myArray[i][j] = ...;
     \end{lstlisting}
 \end{itemize}
 
@@ -686,29 +689,29 @@
 \begin{enumerate}
     \item С помощью конструктора:
     \begin{lstlisting}
-        std::string text("Hello");
-        std::string anotherText(3, 'p'); // "ppp"
-        std::string emptyString;
+std::string text("Hello");
+std::string anotherText(3, 'p'); // "ppp"
+std::string emptyString;
     \end{lstlisting}
 
     В последнем случае \lstinline|std::string emptyString| вызывается конструктор по умолчанию, который создает пустую строку
     \item При помощи оператора \lstinline{=}, который вызывает конструктор:
     \begin{lstlisting}
-        std::string month = "August";
-        std::string emptyString = "";
+std::string month = "August";
+std::string emptyString = "";
     \end{lstlisting}
 \end{enumerate}
 
 Числа нельзя присваивать напрямую строке:
 \begin{lstlisting}
-    std::string error = 'c'; // ERROR
-    std::string anotherError(8); // ERROR
+std::string error = 'c'; // ERROR
+std::string anotherError(8); // ERROR
 \end{lstlisting}
 
 Оператор \lstinline|>>| потока \lstinline|std::cin| может также работать со строками:
 \begin{lstlisting}
-    std::string userAnswer;
-    std::cin >> userAnswer;
+std::string userAnswer;
+std::cin >> userAnswer;
 \end{lstlisting}
 
 \subsubsection{Взятие символа строки (\texttt{[], at()}), размер строки (\texttt{length(), empty()})}
@@ -716,21 +719,21 @@
 \begin{enumerate}
     \item Через оператор \lstinline|[]|:
     \begin{lstlisting}
-        std::string student = "Vasya";
-        std::cout << student[0]; // 'V'
-        std::cout << student[4]; // 'a'
+std::string student = "Vasya";
+std::cout << student[0]; // 'V'
+std::cout << student[4]; // 'a'
 
-        student[2] = 'a';
-        std::cout << student; // "Vaaya"
+student[2] = 'a';
+std::cout << student; // "Vaaya"
     \end{lstlisting}
     \item Через метод \lstinline|at(int index)| класса \lstinline|string|:
     \begin{lstlisting}
-        std::string student = "Vasya";
-        std::cout << student.at(0); // 'V'
-        std::cout << student.at(3); // 'y'
+std::string student = "Vasya";
+std::cout << student.at(0); // 'V'
+std::cout << student.at(3); // 'y'
 
-        student.at(0) = 'M';
-        std::cout << student; // "Masya"
+student.at(0) = 'M';
+std::cout << student; // "Masya"
     \end{lstlisting}
 \end{enumerate}
 
@@ -739,28 +742,28 @@
 
 Размер строки можно узнать с помощью метода \lstinline|length()|:
 \begin{lstlisting}
-    std::string myString = "abcd";
-    std::cout << myString.length(); // 4
+std::string myString = "abcd";
+std::cout << myString.length(); // 4
 \end{lstlisting}
 
 Для того, чтобы узнать, является ли строка пустой, можно вызывать метод \lstinline|empty()|:
 \begin{lstlisting}
-    std::string nonEmptyString("qew12314");
-    std::string emptyString;
-    
-    std::cout << nonEmptyString.empty() << std::endl; // 0
-    std::cout << emptyString.empty() << std::endl; // 1
+std::string nonEmptyString("qew12314");
+std::string emptyString;
+
+std::cout << nonEmptyString.empty() << std::endl; // 0
+std::cout << emptyString.empty() << std::endl; // 1
 \end{lstlisting}
 
 \subsubsection{Присваивание (\texttt{assign()}) и конкатенация строк(\texttt{append()})}
 
 Возможные варианты присваивания:
 \begin{lstlisting}
-    std::string str1("test");
-    std::string str2,str3,str4;
+std::string str1("test");
+std::string str2,str3,str4;
 
-    str2 = str1; // str2 = "test";
-    str3.assign(str1); // str3 = "test";
+str2 = str1; // str2 = "test";
+str3.assign(str1); // str3 = "test";
 \end{lstlisting}
 
 Метод \lstinline|assign| можно использовать, когда необходимо присвоить \texttt{подстроку}. В таком случае метод принимает дополнительные параметры:
@@ -772,22 +775,22 @@
 
 Пример:
 \begin{lstlisting}
-    std::string str1 = "abcd";
-    std::string str2;
-    str2.assign(str1, 2, 2);
-    std::cout << str2; // str2 = "cd";
+std::string str1 = "abcd";
+std::string str2;
+str2.assign(str1, 2, 2);
+std::cout << str2; // str2 = "cd";
 \end{lstlisting}
 
 Возможные варианты конкатенации:
 \begin{lstlisting}
-    std::string str1("abcd");
-    std::string str2;
+std::string str1("abcd");
+std::string str2;
 
-    str2 += str1; // str2 = "abcd";
-    std::string str3(str1 + str2); // str5 = "abcdabcd"
+str2 += str1; // str2 = "abcd";
+std::string str3(str1 + str2); // str5 = "abcdabcd"
 
-    std::string str4 = "zyx";
-    str4.append(str1); // str4 = "zyxabcd";
+std::string str4 = "zyx";
+str4.append(str1); // str4 = "zyxabcd";
 \end{lstlisting}
 
 Метод \lstinline|append| можно использовать, когда необходима конкатенация \texttt{подстроки}. В таком случае метод принимает дополнительные параметры:
@@ -800,28 +803,28 @@
 
 Пример:
 \begin{lstlisting}
-    std::string str1 = "abcdfg";
-    std::string str2 = "111";
-    str2.append(str1, 1, 2);
+std::string str1 = "abcdfg";
+std::string str2 = "111";
+str2.append(str1, 1, 2);
 
-    std::cout << str2; // str2 = "111bc"
+std::cout << str2; // str2 = "111bc"
 \end{lstlisting}
 
 \subsubsection{Сравнение строк (\texttt{compare()})}
 Строки сравниваются лексикографически. Сравнение происходит по первому несовпадающему символу, в противном случае сравниваются длины строк.
 Строки можно сравнивать с помощью операторов \lstinline|==|, \lstinline|>|, \lstinline|<|:
 \begin{lstlisting}
-    std::string str1("abcd");
-    std::string str2("Hello");
-    std::string str3(str2);
-    std::string str4("zxc");
-    std::string str5("zxcd");
+std::string str1("abcd");
+std::string str2("Hello");
+std::string str3(str2);
+std::string str4("zxc");
+std::string str5("zxcd");
 
-    std::cout << (str1 == str2) << endl; // false (0)
-    std::cout << (str2 == str3) << endl; // true (1)
-    std::cout << (str1 < str4) << endl; // true (1)
-    std::cout << (str1 > str2) << endl; // true (1)
-    std::cout << (str4 > str5) << endl; // false (0)
+std::cout << (str1 == str2) << endl; // false (0)
+std::cout << (str2 == str3) << endl; // true (1)
+std::cout << (str1 < str4) << endl; // true (1)
+std::cout << (str1 > str2) << endl; // true (1)
+std::cout << (str4 > str5) << endl; // false (0)
 \end{lstlisting}
 
 Сравнивать строки между собой можно с помощью метода \lstinline|compare()|. Функция возвращает 0, если строки одинаковы; значение меньше 0, если строка лексикографически меньше или все сопоставимые символы одинаковы, но строка меньше; значение больше 0, если строка лексикографически больше или все сопоставимые символы одинаковы, но строка больше.
@@ -829,20 +832,20 @@
 Пример:
 
 \begin{lstlisting}
-    std::string str1("abcd");
-    std::string str2("Hello");
-    std::string str3("zxc");
-    std::string str4("abcdfff");
+std::string str1("abcd");
+std::string str2("Hello");
+std::string str3("zxc");
+std::string str4("abcdfff");
 
-    std::cout << str1.compare(str1) << endl; // 0
-    std::cout << str1.compare(str2) << endl; // 1
-    std::cout << str1.compare(str3) << endl; // -1
-    std::cout << str1.compare(str4) << endl; // -1
+std::cout << str1.compare(str1) << endl; // 0
+std::cout << str1.compare(str2) << endl; // 1
+std::cout << str1.compare(str3) << endl; // -1
+std::cout << str1.compare(str4) << endl; // -1
 \end{lstlisting}
 
 Метод \lstinline|compare()| может сравнивать подстроку вызываемой строки с другой строкой:
 \begin{lstlisting}
-    compare(startIndex, length, anotherString)
+compare(startIndex, length, anotherString)
 \end{lstlisting}
 
 \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы, \textit{anotherString}~---~строка, с которой будет сравниваться подстрока. Необходимо подбирать \textit{startIndex} и \textit{length} так, чтобы подстрока была корректной.
@@ -850,16 +853,16 @@
 Пример:
 
 \begin{lstlisting}
-    std::string str1("abcdefgh");
-    std::string str2("abcd");
+std::string str1("abcdefgh");
+std::string str2("abcd");
 
-    std::cout << str1.compare(0, 4, str2) << endl; // 0
-    std::cout << str2.compare(3, 1, str1) << endl; // 1
+std::cout << str1.compare(0, 4, str2) << endl; // 0
+std::cout << str2.compare(3, 1, str1) << endl; // 1
 \end{lstlisting}
 
 Метод \lstinline|compare| может сравнивать подстроку вызываемой строки с подстрокой другой строки
 \begin{lstlisting}
-    compare(startIndex, length, anotherString, anotherStartIndex, anotherLength)
+compare(startIndex, length, anotherString, anotherStartIndex, anotherLength)
 \end{lstlisting}
 
 \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы, \textit{anotherString}~---~строка, с которой будет сравниваться подстрока, \textit{anotherStartIndex} и \textit{anotherLength} аналогичны по своим функциям с \textit{startIndex} и \textit{length}. 
@@ -871,25 +874,25 @@
 
 Пример использования:
 \begin{lstlisting}
-    std::string first("abcdefg");
-    std::string subFirst = first.substr(3, 4); // "defg"
+std::string first("abcdefg");
+std::string subFirst = first.substr(3, 4); // "defg"
 \end{lstlisting}
 
 \subsubsection{Поиск подстрок и символов (\texttt{find, rfind, find\_first\_of, \\find\_last\_of, find\_first\_not\_of, find\_last\_not\_of})}
 
-Для поиска подстрок необходимо использовать методы \lstinline|find()|, который ведет поиск слева направо, и \lstinline|rfind()|, который ищет справа налево. На вход методы принимают подстроку типа \lstinline|std::string| и возвращают индекс начальной позиции этой подстроки. Если данной подстроки нет, то возвращается \lstinline|string::npos|.
+Для поиска подстрок необходимо использовать методы \lstinline|find()|, который ведет поиск слева направо, и \lstinline|rfind()|, который ищет справа налево. На вход методы принимают подстроку типа \lstinline|std::string| и возвращают индекс начальной позиции этой подстроки. Если данной подстроки нет, то возвращается \lstinline|std::string::npos|.
 
 Примеры:
 \begin{lstlisting}
-    std::string str("abcdefghiabc");
-    
-    std::cout << str.find("abc") << std::endl; // 0
-    std::cout << str.find("fg") << std::endl; // 5
-    std::cout << str.rfind("abc") << std::endl; // 9
-    std::cout << str.rfind("zzz") << std::endl; // string::npos
+std::string str("abcdefghiabc");
+
+std::cout << str.find("abc") << std::endl; // 0
+std::cout << str.find("fg") << std::endl; // 5
+std::cout << str.rfind("abc") << std::endl; // 9
+std::cout << str.rfind("zzz") << std::endl; // string::npos
 \end{lstlisting}
 
-Методы \lstinline|find_first_of(), find_last_of(), find_first_not_of(), find_last_not_of()| принимает на вход набор символов в виде \lstinline|std::string| и возвращают индекс первого\textbackslash последнего вхождения\textbackslash отсутствия в зависимости от своей функции, в противном случае методы возвращают \lstinline|string::npos|.
+Методы \lstinline|find_first_of(), find_last_of(), find_first_not_of(), find_last_not_of()| принимает на вход набор символов в виде \lstinline|std::string| и возвращают индекс первого\textbackslash последнего вхождения\textbackslash отсутствия в зависимости от своей функции, в противном случае методы возвращают \lstinline|std::string::npos|.
 
 Назначения методов:
 \begin{itemize}
@@ -901,12 +904,12 @@
 
 Примеры:
 \begin{lstlisting}
-    std::string str("abcdefghiabc");
+std::string str("abcdefghiabc");
 
-    std::cout << str.find_first_of("tree") << std::endl; // 4
-	std::cout << str.find_last_of("cat") << std::endl; // 11
-	std::cout << str.find_first_not_of("father") << std::endl; // 1
-	std::cout << str.find_last_not_of("car") << std::endl; // 10
+std::cout << str.find_first_of("tree") << std::endl; // 4
+std::cout << str.find_last_of("cat") << std::endl; // 11
+std::cout << str.find_first_not_of("father") << std::endl; // 1
+std::cout << str.find_last_not_of("car") << std::endl; // 10
 \end{lstlisting}
 
 \subsubsection{Удаление символов из строки (\texttt{erase(), clear()})}
@@ -919,22 +922,22 @@
 
 Примеры:
 \begin{lstlisting}
-    std::string test("abcdefgh");
-    test.erase(3);
-    std::cout << test << std::endl; // test = "abc"
-    
-    test = "12345678";
-    test.erase(1, 6);
-    std::cout << test << std::endl; // test = "18";
+std::string test("abcdefgh");
+test.erase(3);
+std::cout << test << std::endl; // test = "abc"
+
+test = "12345678";
+test.erase(1, 6);
+std::cout << test << std::endl; // test = "18";
 \end{lstlisting} 
 
 Если необходимо полностью очистить строку, то необходимо использовать метод \lstinline|clear()|:
 \begin{lstlisting}
-    std::string test("1234abcd");
-    std::cout << test.empty() << std::endl; // 0
-    
-    test.clear();
-    std::cout << test.empty() << std::endl; // 1
+std::string test("1234abcd");
+std::cout << test.empty() << std::endl; // 0
+
+test.clear();
+std::cout << test.empty() << std::endl; // 1
 \end{lstlisting}
 
 \subsubsection{Замена символов в строке (\texttt{replace()})}
@@ -947,10 +950,10 @@
 
 Пример:
 \begin{lstlisting}
-    std::string test("1234abcd");
-    test.replace(4, 4, "5678");
-    std::cout << test << std::endl; 
-    // test = "12345678"
+std::string test("1234abcd");
+test.replace(4, 4, "5678");
+std::cout << test << std::endl; 
+// test = "12345678"
 \end{lstlisting}
 
 \subsubsection{Вставка символов в строку(\texttt{insert()})}
@@ -962,7 +965,7 @@
 
 Пример:
 \begin{lstlisting}
-    std::string test("14");
-    test.insert(1, "23");
-    std::cout << test << std::endl; // "1234"
+std::string test("14");
+test.insert(1, "23");
+std::cout << test << std::endl; // "1234"
 \end{lstlisting}
