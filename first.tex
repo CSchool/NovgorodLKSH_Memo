@@ -969,3 +969,143 @@ std::string test("14");
 test.insert(1, "23");
 std::cout << test << std::endl; // "1234"
 \end{lstlisting}
+
+\subsection{Структуры}
+\subsubsection{Синтаксис объявления}
+Структуры~---~пользовательский тип данных, который позволяет группировать переменные с разными типами под одним именем. Объявлять структуры необходимо в самом начале файла после объявления \lstinline|#include| и использования пространств имен (\lstinline|using namespace ...|), но до функций. Делается это для того, чтобы каждая функция могла <<знать>> о существовании данной структуры.
+
+Синтаксис структуры:
+\begin{lstlisting}
+    struct structName
+    {
+        Type variableName1;
+        Type variableName2;
+        ...
+        Type variableNameN;
+    };
+\end{lstlisting}
+
+\lstinline|structName|~---~пользовательское имя структуры, \lstinline|Type|~---~тип переменной в структуре, \lstinline|variableName|~---~имя переменной (оно же поле структуры).
+
+Пример структуры:
+\begin{lstlisting}
+    struct Person
+    {
+        std::string name;
+        std::string sirname;
+        unsigned int age;
+    };
+\end{lstlisting}
+
+Создание экземпляра структуры:
+\lstinline{structName ourStruct;}
+
+\subsubsection{Конструкторы структур}
+Для структуры можно указывать специальный метод~---~\texttt{конструктор}, с помощью которого при инициализации экземпляра структуры можно определять поля структуры:
+\begin{lstlisting}
+    struct Person
+    {
+        std::string name;
+        std::string surname;
+        unsigned int age;
+        // constructor
+        Person(std::string personName, std::string personSurname, unsigned int personAge)
+        {
+            name = personName;
+            sirname = personSurname;
+            age = personAge;
+        }
+    };
+\end{lstlisting}
+
+При объявлении конструктора нужно следовать следующим правилам:
+\begin{itemize}
+    \item Конструктор должен иметь такое же имя, что и название структуры;
+    \item Перед конструктором не должно быть типа (даже \texttt{void'}а).
+\end{itemize}
+
+Так как конструктор является функцией, то оно может принимать на вход \textit{n}-ое количество параметров, с помощью которых можно инициализировать поля структуры. Также структура может иметь несколько конструкторов с разными параметрами.
+
+Так же структура может иметь конструктор по умолчанию, который вызывается, если не был вызван ни один другой конструктор. Конструкторы по умолчанию используются для того, чтобы поля не были инициализированы <<мусором>>.
+
+Пример конструктора по умолчанию:
+\begin{lstlisting}
+    struct Person
+    {
+        std::string name;
+        std::string surname;
+        unsigned int age;
+        
+        // Default constructor
+        Person()
+        {
+            name = "";
+            surname = "";
+            age = 0;
+        }
+    };
+\end{lstlisting}
+
+
+При инициализации экземпляра структуры необходимо передать параметры в конструктор:
+\begin{lstlisting}
+    int main()
+    {
+        ...
+        Person man("Andrey", "Popov", 16);
+        ...
+    }
+\end{lstlisting} 
+
+Если передавать на данный момент времени нечего, а необходимы корректно определенные поля, то необходимо использовать конструктор по умолчанию:
+\begin{lstlisting}
+    int main()
+    {
+        ...
+        Person man();
+        ...
+    }
+\end{lstlisting} 
+
+Также имеется возможность просто объявить экземпляр структуры, но в таком случае поля экземпляра структуры будут неинициализированными!
+
+\begin{lstlisting}
+    int main()
+    {
+        ...
+        Person man;
+        ...
+    }
+\end{lstlisting}
+
+\subsubsection{Обращение к полям структуры}
+
+После того, как экземпляр структуры создан, можно обращаться к его полям и изменять их. Чтобы получить доступ к полю, необходимо использовать оператор~\lstinline|.| к экземпляру структуры:
+
+\begin{lstlisting}
+    int main()
+    {
+        Person man();
+        
+        std::string name = "";
+        std::string surname = "";
+        unsigned int age = 0;
+        
+        std::cout << "Please, enter your name:" << std::endl;
+        std::cin >> name;
+        
+        man.name = name;
+        
+        std::cout << "Please, enter your surname:" << std::endl;
+        std::cin >> surname;
+        
+        man.surname = surname;
+        
+        std::cout << "Please, enter your age: " << std::endl;
+        std::cin >> age;
+        
+        man.age = age;
+        
+        std::cout << "Hello, dear " << man.name << "! Your surname is " << man.surname << " and your age is " << man.age << std::endl;
+    }
+\end{lstlisting}
