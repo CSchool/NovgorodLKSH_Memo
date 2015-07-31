@@ -101,7 +101,7 @@ int main()
 
 \subsection{Чтение данных с консоли}
 
-С помощью потока \textit{std::cin} можно считывать данные, которые вводятся с консоли:
+С помощью потока \lstinline|std::cin| можно считывать данные, которые вводятся с консоли:
 \begin{lstlisting}
 #include <iostream>
 int main()
@@ -131,17 +131,17 @@ int main()
 
 \lstinline|<Modification> <Type> variableName = variableValue;|
 
-\textit{Type} --- тип переменной, \textit{Modification} --- изменение (модификация), накладываемое на переменную, \textit{variableName} --- имя переменной, \textit{variableValue} --- значение переменной.
+\lstinline|Type| --- тип переменной, \lstinline|Modification| --- изменение (модификация), накладываемое на переменную, \lstinline|variableName| --- имя переменной, \lstinline|variableValue| --- значение переменной.
 
 После объявления переменной имеет смысл назначить ей какое-либо допустимое значение. Даже если переменная будет изменяться в дальнейшем коде программы, правилом хорошего тона является выставления значения по умолчанию, в противном случае при выполнении программы в этих переменных может оказаться <<мусор>> (случайные значения).
 
 Инициализацию переменной можно двумя способами:
 \begin{itemize}
     \item Через оператор \lstinline{=} :
-        
+
         \lstinline|int a = 5;|
     \item Через оператор \lstinline{()} --- инициализация переменной с помощью конструктора:
-        
+
          \lstinline|int a(5);|
 \end{itemize}
 
@@ -333,7 +333,7 @@ if (expression_1)
     statement_2]
 \end{lstlisting}
 
-\textit{expression} --- логическое выражение; \textit{statement\_X} --- выполняемая операция.
+\lstinline|expression| --- логическое выражение; \lstinline|statement\_X| --- выполняемая операция.
 
 Начало условия задается ключевым словом \lstinline|if|, после которого в круглых скобках идет логическое выражение типа \lstinline|bool|. Наличие круглых скобок вне выражения обязательно, в противном случае компилятор выкинет ошибку. После выражения идут операции, которые следует выполнять в том случае, если выражение в круглых скобках истинно. Если операций несколько, то необходимо поставить фигурные скобки, в противном случае ими можно обойтись.
 
@@ -401,7 +401,7 @@ expression ? statement_1 : statement_2;
 
 Оператор сначала вычисляет выражение \lstinline{expression}.
 Если это выражение принимает значение \lstinline|true|,
-то результатом выполнения всего оператора будет \lstinline|statement_1|, 
+то результатом выполнения всего оператора будет \lstinline|statement_1|,
 а в противном случае~---~\lstinline|statement_2|.
 
 Пример:
@@ -421,7 +421,7 @@ switch ( expression )
 }
 \end{lstlisting}
 
-\textit{expression} --- выражение, которое можно привести к целочисленному типу; \textit{constant-expression} --- константное значение, если выражение будет иметь данное значение, то произойдет обработка блока \textit{statement}. Если ни один из \lstinline|case|'ов не сработал, то вычисляется \textit{statement} в блоке \lstinline|default|, однако данный блок не обязателен к указанию и может быть опущен --- в таком случаю программа перейдет к выполнению следующих инструкций после оператора \lstinline|switch|.
+\lstinline|expression| --- выражение, которое можно привести к целочисленному типу; \lstinline|constant-expression| --- константное значение, если выражение будет иметь данное значение, то произойдет обработка блока \lstinline|statement|. Если ни один из \lstinline|case|'ов не сработал, то вычисляется \lstinline|statement| в блоке \lstinline|default|, однако данный блок не обязателен к указанию и может быть опущен --- в таком случаю программа перейдет к выполнению следующих инструкций после оператора \lstinline|switch|.
 
 Пример использования:
 \begin{lstlisting}
@@ -474,7 +474,7 @@ while (expression)
     statement
 \end{lstlisting}
 
-\textit{Expression} --- выражение типа \lstinline|bool|, задает условие выхода из цикла; \textit{statement}~---~набор операций, которые будут выполняться в цикле (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно). Цикл \lstinline|while| будет выполняться до тех пор, пока \textit{expression} будет равно \lstinline|true|. Программа может не войти в тело цикла (то есть выполнить операции в нем), если изначально \textit{expression} будет равен \lstinline|false|.
+\lstinline|expression| --- выражение типа \lstinline|bool|, задает условие выхода из цикла; \lstinline|statement|~---~набор операций, которые будут выполняться в цикле (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно). Цикл \lstinline|while| будет выполняться до тех пор, пока \lstinline|expression| будет равно \lstinline|true|. Программа может не войти в тело цикла (то есть выполнить операции в нем), если изначально \lstinline|expression| будет равен \lstinline|false|.
 
 Пример:
 
@@ -518,7 +518,7 @@ do
 while (expression);
 \end{lstlisting}
 
-\textit{Expression} --- выражение типа \lstinline|bool|, задает условие выхода из цикла; \textit{statement}~---~набор операций, которые будут выполняться в цикле (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно). Цикл \lstinline|do-while| будет выполняться до тех пор, пока выражение \textit{expression} будет равно \lstinline|true|. В данном цикле блок \textit{statement} будет выполняться в первую очередь, условие выхода из цикла будет проверяться после выполнения операций. Операторы \lstinline|break| и \lstinline|continue| имеют такой же эффект, что и в цикле \lstinline|while|.
+\lstinline|expression| --- выражение типа \lstinline|bool|, задает условие выхода из цикла; \lstinline|statement|~---~набор операций, которые будут выполняться в цикле (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно). Цикл \lstinline|do-while| будет выполняться до тех пор, пока выражение \lstinline|expression| будет равно \lstinline|true|. В данном цикле блок \lstinline|statement| будет выполняться в первую очередь, условие выхода из цикла будет проверяться после выполнения операций. Операторы \lstinline|break| и \lstinline|continue| имеют такой же эффект, что и в цикле \lstinline|while|.
 
 Пример:
 \begin{lstlisting}
@@ -539,10 +539,10 @@ for (init-expression ; cond-expression ; loop-expression)
 
 Обозначения:
 \begin{itemize}
-    \item \textit{init-expression} --- набор операций, которые выполняются один раз \textbf{до} начала цикла, чаще всего используется для инициализации переменных, которые будут использоваться в цикле для подсчета итераций;
-    \item \textit{cond-expression} --- выражение типа \lstinline|bool|, которое задает условие выхода из цикла --- проверяется перед каждой итерацией цикла (в том числе и перед самой первой), если \textit{cond-expression} равное \lstinline|false|, то цикл завершается;
-    \item \textit{loop-expression} --- набор операций, который выполняется после итерации цикла, обычно используется для изменения переменных, который подсчитывают количество итераций;
-    \item \textit{statement} --- набор операций, которые будут производится в каждой итерации цикла (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно).
+    \item \lstinline|init-expression| --- набор операций, которые выполняются один раз \textbf{до} начала цикла, чаще всего используется для инициализации переменных, которые будут использоваться в цикле для подсчета итераций;
+    \item \lstinline|cond-expression| --- выражение типа \lstinline|bool|, которое задает условие выхода из цикла --- проверяется перед каждой итерацией цикла (в том числе и перед самой первой), если \textit{cond-expression} равное \lstinline|false|, то цикл завершается;
+    \item \lstinline|loop-expression| --- набор операций, который выполняется после итерации цикла, обычно используется для изменения переменных, который подсчитывают количество итераций;
+    \item \lstinline|statement| --- набор операций, которые будут производится в каждой итерации цикла (если операций больше одной, то нужно заключить их в фигурные скобки, в противном случае делать данное действие необязательно).
 \end{itemize}
 
 Пример:
@@ -555,7 +555,7 @@ for (int i = 0; i < lim; ++i)
     sum += i;
 \end{lstlisting}
 
-В блоках \textit{init-expression} и \textit{loop-expression} может быть несколько выражений, разделенных запятой:
+В блоках \lstinline|init-expression| и \lstinline|loop-expression| может быть несколько выражений, разделенных запятой:
 \begin{lstlisting}
 int sum = 0;
 
@@ -563,7 +563,7 @@ for (int i = 0, j = 0; i + j < lim; ++i, ++j)
     sum += i + j;
 \end{lstlisting}
 
-В блоке \textit{loop-expression} переменные, ответственные за количество
+В блоке \lstinline|loop-expression| переменные, ответственные за количество
 итераций, могут изменяться по-разному:
 \begin{lstlisting}
 for (int i = 10; i > 0; --i)
@@ -586,9 +586,9 @@ for (int k = 0; k > 200; k += 2)
 
 \lstinline|Type arrayName[arraySize];|
 
-\textit{Type} --- тип элементов массива
+\lstinline|Type| --- тип элементов массива
 (массив может состоять из целых чисел, дробных, символов, \ldots);
-\textit{arrayName}~---~название массива; \textit{arraySize}~---~размер
+\lstinline|arrayName|~---~название массива; \lstinline|arraySize|~---~размер
 массива. Индексы, по которым можно обращаться к элементам массива,
 лежат в диапазоне~$\left[ 0 \ldots \text{arraySize} - 1 \right]$.
 
@@ -601,9 +601,9 @@ for (int k = 0; k > 200; k += 2)
     \lstinline|int costs[4] = {100, 200, 300, 400};|
 
     В таком случае можно не указывать размер массива:
-    
+
     \lstinline|int costs[] = {2, 4, 6};|
-    
+
     \item Инициализировать массив при помощи циклов:
     \begin{lstlisting}
 const int arraySize = 5;
@@ -633,7 +633,7 @@ for (int i = 0; i < arraySize; ++i)
 
 \lstinline|Type arrayName[arraySizeRow][arraySizeColumn];|
 
-\textit{Type} --- тип массива (массив может состоять из целых чисел, дробных, символов, \ldots); \textit{arrayName}~---~название массива; \textit{arraySizeRow}~---~количество одномерных массивов, \textit{arraySizeColumn}~---~размер каждого одномерного массива. Количество одномерных массивов лежит в диапазоне $\left[ 0 \ldots \text{arraySizeRow} - 1 \right]$, размерность одномерных массивов~---~$\left[ 0 \ldots \text{arraySizeColumn} - 1 \right]$. Обращение к элементу двумерного массива по индексам --- \texttt{arrayName[\textit{indexRow}][\textit{indexColumn}]}.
+\lstinline|Type| --- тип массива (массив может состоять из целых чисел, дробных, символов, \ldots); \lstinline|arrayName|~---~название массива; \lstinline|arraySizeRow|~---~количество одномерных массивов, \lstinline|arraySizeColumn|~---~размер каждого одномерного массива. Количество одномерных массивов лежит в диапазоне $\left[ 0 \ldots \text{arraySizeRow} - 1 \right]$, размерность одномерных массивов~---~$\left[ 0 \ldots \text{arraySizeColumn} - 1 \right]$. Обращение к элементу двумерного массива по индексам --- \texttt{arrayName[\textit{indexRow}][\textit{indexColumn}]}.
 
 Инициализация двумерного массива:
 \begin{itemize}
@@ -770,7 +770,7 @@ str3.assign(str1); // str3 = "test";
 
 \lstinline|assign(source, startIndex, length)|
 
-\textit{source}~---~строка типа \lstinline|string|, из которой будет браться подстрока, \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы.
+\textit{source}~---~строка типа \lstinline|string|, из которой будет браться подстрока, \lstinline|startIndex|~---~начальный индекс, с которого будет начинаться копирование, \lstinline|length|~---~количество символов, которые будут скопированы.
 Необходимо, чтобы выполнялось условие~$length \leqslant source.length() - startIndex$.
 
 Пример:
@@ -798,7 +798,7 @@ str4.append(str1); // str4 = "zyxabcd";
 \lstinline|append(source, startIndex, length)|
 
 
-\textit{source}~---~строка типа \lstinline|string|, из которой будет браться подстрока, \textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы.
+\lstinline|source|~---~строка типа \lstinline|string|, из которой будет браться подстрока, \lstinline|startIndex|~---~начальный индекс, с которого будет начинаться копирование, \lstinline|length|~---~количество символов, которые будут скопированы.
 Необходимо, чтобы выполнялось условие~$length \leqslant source.length() - startIndex$.
 
 Пример:
@@ -848,7 +848,7 @@ std::cout << str1.compare(str4) << endl; // -1
 compare(startIndex, length, anotherString)
 \end{lstlisting}
 
-\textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы, \textit{anotherString}~---~строка, с которой будет сравниваться подстрока. Необходимо подбирать \textit{startIndex} и \textit{length} так, чтобы подстрока была корректной.
+\lstinline|startIndex|~---~начальный индекс, с которого будет начинаться копирование, \lstinline|length|~---~количество символов, которые будут скопированы, \lstinline|anotherString|~---~строка, с которой будет сравниваться подстрока. Необходимо подбирать \lstinline|startIndex| и \lstinline|length| так, чтобы подстрока была корректной.
 
 Пример:
 
@@ -865,7 +865,7 @@ std::cout << str2.compare(3, 1, str1) << endl; // 1
 compare(startIndex, length, anotherString, anotherStartIndex, anotherLength)
 \end{lstlisting}
 
-\textit{startIndex}~---~начальный индекс, с которого будет начинаться копирование, \textit{length}~---~количество символов, которые будут скопированы, \textit{anotherString}~---~строка, с которой будет сравниваться подстрока, \textit{anotherStartIndex} и \textit{anotherLength} аналогичны по своим функциям с \textit{startIndex} и \textit{length}. 
+\lstinline|startIndex|~---~начальный индекс, с которого будет начинаться копирование, \lstinline|length|~---~количество символов, которые будут скопированы, \lstinline|anotherString|~---~строка, с которой будет сравниваться подстрока, \lstinline|anotherStartIndex| и \lstinline|anotherLength| аналогичны по своим функциям с \lstinline|startIndex| и \lstinline|length|.
 
 \subsubsection{Подстрока (\texttt{substr})}
 С помощью метода \lstinline{substr} можно брать подстроки оригинальной строки:
@@ -918,7 +918,7 @@ std::cout << str.find_last_not_of("car") << std::endl; // 10
 
 \lstinline|erase(index, length)|
 
-\textit{index} указывает индекс с которого необходимо начать удаление, \textit{length} указывает сколько символов необходимо удалить. Если не указывать параметр \textit{length}, то будут удаление будет происходить до конца строки.
+\lstinline|index| указывает индекс с которого необходимо начать удаление, \lstinline|length| указывает сколько символов необходимо удалить. Если не указывать параметр \lstinline|length|, то будут удаление будет происходить до конца строки.
 
 Примеры:
 \begin{lstlisting}
@@ -929,7 +929,7 @@ std::cout << test << std::endl; // test = "abc"
 test = "12345678";
 test.erase(1, 6);
 std::cout << test << std::endl; // test = "18";
-\end{lstlisting} 
+\end{lstlisting}
 
 Если необходимо полностью очистить строку, то необходимо использовать метод \lstinline|clear()|:
 \begin{lstlisting}
@@ -946,13 +946,13 @@ std::cout << test.empty() << std::endl; // 1
 
 \lstinline|replace(index, length, replaceString)|
 
-\textit{index} указывает с какого индекса в строке необходимо произвести замену, \textit{length} указывает сколько символов необходимо заменить, \textit{replaceString} является строкой, на которую происходит замена.
+\lstinline|index| указывает с какого индекса в строке необходимо произвести замену, \lstinline|length| указывает сколько символов необходимо заменить, \lstinline|replaceString| является строкой, на которую происходит замена.
 
 Пример:
 \begin{lstlisting}
 std::string test("1234abcd");
 test.replace(4, 4, "5678");
-std::cout << test << std::endl; 
+std::cout << test << std::endl;
 // test = "12345678"
 \end{lstlisting}
 
@@ -961,7 +961,7 @@ std::cout << test << std::endl;
 
 \lstinline|insert(index, insertString)|
 
-\textit{index} указывает индекс, с которого необходимо сделать вставку, \textit{insertString} является строкой, которую необходимо вставить.
+\lstinline|index| указывает индекс, с которого необходимо сделать вставку, \lstinline|insertString| является строкой, которую необходимо вставить.
 
 Пример:
 \begin{lstlisting}
