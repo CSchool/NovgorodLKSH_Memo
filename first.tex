@@ -970,6 +970,134 @@ test.insert(1, "23");
 std::cout << test << std::endl; // "1234"
 \end{lstlisting}
 
+\subsection{Функции}
+\subsubsection{Синтаксис}
+
+В языке \texttt{C++} можно создавать пользовательские функции, которые можно использовать в своих программах. Функции помогают структурировать код, делать его более понятным. Если в коде присутствуют одинаковые куски кода, то их имеет смысл вынести в функции.
+
+Синтаксис пользовательских функций:
+\begin{lstlisting}
+    FunType functionName(ParamType1 paramName1, ..., ParamTypeN paramNameN)
+    {
+        ...
+    }
+\end{lstlisting}
+
+\lstinline|FunType|~---~тип возвращаемого значения функции, \lstinline|functionName|~---~наименование функции, \lstinline|ParamType|~---~тип параметра, \lstinline|paramName|~---~наименование параметра.
+
+Пример функции, которая принимает в качестве параметра целочисленное число и возвращает его квадрат:
+
+\begin{lstlisting}
+    long long sqr(const int value)
+    {
+        return value * value;
+    }
+\end{lstlisting}
+
+Функция может возвращать любой базовый тип в С++, любое пользовательское значение при помощи ключевого слова \lstinline|return|. В таком случае произойдет выход из функции и передача значения. Также функция может ничего не возвращать, в таком случае необходимо в качестве типа использовать ключевое слово \lstinline|void|. В случае, если использовать \lstinline|return| в функции, которая возвращает значение \lstinline|void|, то функция просто завершит свою работу и передаст управление программе дальше.
+
+Пример функции, которая выводит строку на экран в том случае, если она не пустая:
+
+\begin{lstlisting}
+    void printString(const std::string text)
+    {
+        if (!text.empty())
+            std::cout << text << std::endl;
+    }
+\end{lstlisting}
+
+\subsubsection{Прототипы функций}
+Функция вместе с реализацией должна находиться раньше, чем происходит её вызов, в противном случае произойдет ошибка компиляции, так как компилятор не будет знать о существовании данной функции.
+
+\begin{lstlisting}
+    long long sqr(const int value)
+    {
+        ...
+    }
+    
+    int main()
+    {
+        ...
+        long long a = sqr(5);
+        ...
+        return 0;
+    }
+\end{lstlisting}
+
+Однако существует способ разделить объявление функции от её реализации. Для этого необходимо использовать \texttt{прототипы функций}. Для этого необходимо привести до использования функции её \texttt{сигнатуру}~---~тип возвращаемого значения функции, имя функции и её параметры. Потом необходимо привести \texttt{реализацию} функции:
+
+\begin{lstlisting}
+    long long sqr(const int value); // signature
+    
+    int main()
+    {
+        ...
+        long long a = sqr(5); // function call
+        ...
+        return 0;
+    }
+    
+    long long sqr(const int value) // realization
+    {
+        return value * value;
+    }
+\end{lstlisting}
+
+\subsubsection{Передача аргументов в функции по значению и по ссылке}
+Аргументы в функцию можно передавать по значению (в таком случае на стороне функции произойдет полное копирование аргумента, что при больших типах данных может замедлить работу, но зато изменение аргумента в функции не повлияет на переменную, которая была передана извне функции), либо по ссылке (изменение переменной будет произведено как и в самой функции, так и извне неё). Способ передачи аргумента задается в \texttt{сигнатуре} функции.
+
+Аргумент по значению:
+\begin{lstlisting}
+    void incCopy(int value)
+    {
+        ++value;
+    }
+    
+    int main()
+    {
+        int a = 1;
+        inc(a);
+        std::cout << a << std::endl; // a = 1; 
+    }
+\end{lstlisting}
+
+Аргумент по ссылке:
+\begin{lstlisting}
+    void incRef(int &value)
+    {
+        ++value;
+    }
+
+    int main()
+    {
+        int a = 1;
+        inc(a);
+        std::cout << a << std::endl; // a = 2;
+    }
+\end{lstlisting}
+
+\subsubsection{Аргументы по умолчанию}
+У параметров пользовательских функций можно выставлять аргументы по умолчанию, которые будут применяться, если в аргументы функции ничего не будет передаваться при вызове. Данные аргументы должны быть самыми правыми аргументами в списке параметров функции. Если вызывается функция с двумя или более аргументами по умолчанию и если пропущенный аргумент не является самым правым в списке аргументов, то все аргументы справа от пропущенного тоже пропускаются. 
+
+Аргументы по умолчанию обычно указываются в прототипе функции при помощи оператора \lstinline|=|, в реализации функции указывать значения по умолчанию не нужно.
+
+Пример функции, которая подсчитывает площадь прямоугольника, в том случае, если указана ширина, в противном случае подсчитывается площадь квадрата по переданной длине:
+
+\begin{lstlisting}
+    double getSquare(double height, double width = -1.0);
+    
+    int main()
+    {
+        std::cout << getSquare(5.0, 6.0) << std::endl; // 30.0
+        std::cout << getSquare(10.0) << std::endl // 100.0
+    }
+    
+    double getSquare(double height, double width)
+    {
+        return weight == -1.0 ? height * height : height * width;
+    }
+\end{lstlisting}
+
 \subsection{Структуры}
 \subsubsection{Синтаксис объявления}
 Структуры~---~пользовательский тип данных, который позволяет группировать переменные с разными типами под одним именем. Объявлять структуры необходимо в самом начале файла после объявления \lstinline|#include| и использования пространств имен (\lstinline|using namespace ...|), но до функций. Делается это для того, чтобы каждая функция могла <<знать>> о существовании данной структуры.
@@ -1035,7 +1163,7 @@ std::cout << test << std::endl; // "1234"
         std::string name;
         std::string surname;
         unsigned int age;
-        
+
         // Default constructor
         Person()
         {
@@ -1055,7 +1183,7 @@ std::cout << test << std::endl; // "1234"
         Person man("Andrey", "Popov", 16);
         ...
     }
-\end{lstlisting} 
+\end{lstlisting}
 
 Если передавать на данный момент времени нечего, а необходимы корректно определенные поля, то необходимо использовать конструктор по умолчанию:
 \begin{lstlisting}
@@ -1065,7 +1193,7 @@ std::cout << test << std::endl; // "1234"
         Person man();
         ...
     }
-\end{lstlisting} 
+\end{lstlisting}
 
 Также имеется возможность просто объявить экземпляр структуры, но в таком случае поля экземпляра структуры будут неинициализированными!
 
@@ -1086,26 +1214,26 @@ std::cout << test << std::endl; // "1234"
     int main()
     {
         Person man();
-        
+
         std::string name = "";
         std::string surname = "";
         unsigned int age = 0;
-        
+
         std::cout << "Please, enter your name:" << std::endl;
         std::cin >> name;
-        
+
         man.name = name;
-        
+
         std::cout << "Please, enter your surname:" << std::endl;
         std::cin >> surname;
-        
+
         man.surname = surname;
-        
+
         std::cout << "Please, enter your age: " << std::endl;
         std::cin >> age;
-        
+
         man.age = age;
-        
+
         std::cout << "Hello, dear " << man.name << "! Your surname is " << man.surname << " and your age is " << man.age << std::endl;
     }
-\end{lstlisting}
+\end{lstlisting} 
