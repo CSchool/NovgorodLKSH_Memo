@@ -1,0 +1,357 @@
+\section{ООП (Основы)}
+\subsection{Классы}
+\subsubsection{Определение, объекты}
+
+Объектно-ориентированное программирование (ООП)~---~парадигма программирования, в которой основными концепциями являются понятия объектов и классов. Если проводить аналогии с объектами из реальной жизни, то машина~---~это \emph{объект}, который построен по неким чертежам или схемам (\emph{класс}), которые описывают данный объект~---~его характеристики и возможности. У машины может быть свой вес, цвет, вместимость~---~всё это является \emph{свойствами} объектов. Значения этих свойств у различных машин (объектов) может различаться. Возможность ездить, подавать сигнал~---~это \emph{методы} объекта. Имея один чертеж (класс), можно создавать огромное количество машин (объектов), у которых будут в наличии все эти методы, причем не нужно будет задумываться о реализации этих методов для каждого из объектов!
+
+Основные принципы ООП:
+\begin{itemize}
+    \item Инкапсуляция~---~данное свойство позволяет объединить данные и методы, работающие с ними, в классе, и скрыть детали реализации от пользователя;
+    \item Наследование~---~свойство, позволяющее создать новый класс-потомок на основе уже существующего, при этом все характеристики класса родителя присваиваются классу-потомку;
+    \item Полиморфизм~---~свойство классов, позволяющее использовать объекты классов с одинаковым интерфейсом без информации о типе и внутренней структуре объекта;
+\end{itemize}
+
+В \texttt{C++} класс~---~ это пользовательский тип данных, который может группировать в себе как переменные различных типов~---~\emph{свойства}, так и различные функции~---~\emph{методы}.
+
+Класс можно объявить через ключевое слово \lstinline|class| и в фигурных скобках перечислить его свойства и методы:
+
+\begin{lstlisting}
+class Message
+{
+public:
+    void showMessage(const std::string& text)
+    {
+        std::cout << "Hello user! " << text << std::endl;
+    }
+};
+
+int main()
+{
+    Message worldMessage;
+    worldMessage.showMessage("Welcome to our world!"); // "Hello user! Welcome to our world!"
+    return 0;
+}
+\end{lstlisting}
+
+В данном примере рассматривается класс \lstinline|Message|, который имеет метод \lstinline|showMessage|, который выводит на консоль текст, состоящий из строки \lstinline|"Hello user!"| и параметра \lstinline|text|, которые соединены между собой. В функции \lstinline|main| объявляется \emph{объект} \lstinline|worldMessage| класса \lstinline|Message|, у которого вызывается метод \lstinline|showMessage|.
+
+Ещё один пример класса:
+\begin{lstlisting}
+class Course
+{
+private:
+    std::string courseName;
+    
+public:
+    Course(const std::string& course)
+    {
+        courseName = course;
+    }
+
+    void printCourseName()
+    {
+        std::cout << "Your course is " << courseName;
+    }
+    
+    std::string& getCourseName()
+    {
+        return courseName;
+    }
+};
+
+int main()
+{
+    Course firstCourse("C++");
+    Course secondCourse("Geometry");
+    
+    firstCourse.printCourseName(); // "Your course is C++"
+    secondCourse.printCourseName(); // "Your course is Geometry"
+    
+    std::cout << "My favorite course is " << firstCourse.getCourseName() << " and not so favorite course is " << secondCourse.getCourseName() << std::endl;
+    
+    // My favorite course is C++ and not so favorite course is Geometry
+    
+    return 0;
+}
+\end{lstlisting}
+
+Данный класс \lstinline|Course| представляет собой предмет в школе. У него есть свойство \lstinline|courseName|, которое хранит в себе название курса; метод \lstinline|getCourseName|, который возвращает наименование курса; \lstinline|printCourseName| печатает название курса; \lstinline|Course| является \emph{конструктором} класса (подробнее см.~\ref{subsubsec:ContstructorDestructor}) и инициализирует \lstinline|courseName| параметром. В функции \lstinline|main| создается два курса \lstinline|firstCourse|, который инициализируется строкой \emph{C++} и \lstinline|secondCourse|, который инициализируется строкой \emph{Geometry}. Дальше выводятся названия этих функций при помощи метода \lstinline|printCourseName| и берутся напрямую названия курсов через \lstinline|getCourseName| для создания строки.
+
+\subsubsection{Модификаторы доступа к членам класса}
+В примере с классом \lstinline{Message} можно увидеть ключевое слово \lstinline|public|, которое указывает на модификатор доступа к этому методу. Всего существует 3 модификатора доступа в \texttt{C++}:
+
+\begin{itemize}
+    \item \lstinline|public|~---~все свойства и методы открыты для всех, т.е. через объект можно будет обращаться к методам, или изменять свойства (изменения могут происходить как внутри класса, так и снаружи);
+    \item \lstinline|private|~---~свойства и методы в данной секции можно использовать только внутри класса, т.е. свойства изменяются только внутри \emph{этого} класса и методы можно вызывать только внутри \emph{этого} класса;
+    \item \lstinline|protected|~---~доступ к свойствам и методам открыт как и внутри класса, так и внутри производных классов от изначального, снаружи свойства не изменяются, методы не вызываются;
+\end{itemize} 
+
+Правила объявления секций доступа:
+\begin{lstlisting}
+class Test
+{
+    public:
+        // public properties and methods
+        int publicInt;
+        void incPublicInt()
+        {
+            ++publicInt;
+        }
+
+    private:
+        // private properties and methods
+        int privateInt;
+        void showMessage()
+        {
+            std::cout << "you can't invoke me from object!";
+        }
+
+    protected:
+        // protected properties and methods
+        // ...
+};
+\end{lstlisting}
+
+Свойство \lstinline|publicInt| можно изменять как и внутри класса, так и снаружи через объект данного класса. Метод \lstinline|incPublicInt| также можно использовать как внутри класса, так и снаружи через объект. Доступ к свойству \lstinline|privateInt| и методу \lstinline|showMessage| через объект данного класса запрещен. Модификатор \lstinline|protected| необходим для ситуаций, когда происходит наследование классов. 
+
+\subsubsection{Get- и Set- функции}
+Как правило, свойства в классах должны находится в \lstinline|private| секциях доступа. Однако существует возможность создать функции, которые позволяют получать значение (\lstinline|get|) и изменять эти значения (\lstinline|set|) через объекты классов.
+
+Метод \lstinline|get| должна возвращать свойство класса:
+
+\begin{lstlisting}
+class BankAccount
+{
+private:
+    double cash;
+public:
+    double getCash()
+    {
+        return cash;
+    }
+};
+\end{lstlisting}
+
+Метод \lstinline|set| присваивает определённому свойству значение параметра, переданного в метод. При этом можно осуществлять проверку значения параметра, чтобы не произошло некорректной работы в дальнейшем:
+
+\begin{lstlisting}
+class BankAccount
+{
+private:
+    double cash;
+public:
+    void setCash(double newCash)
+    {
+        if (newCash >= 0)
+            cash = newCash;
+    }
+};
+\end{lstlisting}
+
+\subsubsection{Конструктор и деструктор}
+\label{subsubsec:ContstructorDestructor}
+\emph{Конструктор}~---~функция, которая вызывается в самом начале <<жизни>> объекта класса (сразу же после инициализации объекта в памяти) и необходима для подготовки объекта к работе: инициализация свойств и вызовов методов. \emph{Деструктор}~---~функция, которая вызывается перед тем, как будет удален объект из памяти и предназначен прежде всего для уничтожения внутренних данных, которые выделены в динамической памяти.
+
+Конструктор должен начинаться с имени класса и у него не должно быть никакого типа перед названием. Конструктор обязательно должен иметь модификатор доступа \lstinline|public|. Как и для обычной функции, в конструктор можно передавать различные параметры.
+
+Пример конструктора с параметрами:
+
+\begin{lstlisting}
+class Figure
+{
+private:
+    double square;
+
+public:
+    Figure(double figureSquare) // constructor
+    {
+        square = figureSquare;
+    }
+};
+
+int main()
+{
+    Figure circle(15.0); // circle.square = 15.0;
+    ...
+    
+    return 0;
+}
+\end{lstlisting} 
+
+Также существует \emph{конструктор по умолчанию}. Таким конструктором является всякий конструктор, у которого нет параметров и вызывается он в том случае, если создается объект без параметров. Если он явно не указан, то он генерируется автоматически с пустым содержимым.
+
+\begin{lstlisting}
+class Figure
+{
+private:
+    double square;
+
+public:
+    Figure() // default constructor
+    {
+        square = 0;
+    }
+    
+    Figure(double figureSquare) // constructor
+    {
+        square = figureSquare;
+    }
+};
+
+int main()
+{
+    Figure circle(15.0); // circle.square = 15.0;
+    Figure triangle; // triangle.square = 0.0;
+    ...
+
+    return 0;
+}
+\end{lstlisting} 
+
+Деструктор объявляется практически также, как и конструктор, но к названию добавляется символ~\lstinline|~|:
+
+\begin{lstlisting}
+class Figure
+{
+public:
+    ~Figure() // destructor
+    {
+        ...
+    }
+};
+\end{lstlisting}
+
+\subsubsection{Разделение класса на два файла. Отделения интерфейса от реализации}
+В языке \texttt{C++} существует возможность разделить класс на \emph{интерфейс} и \emph{реализацию}. Интерфейс~---~описание свойств и методов класса без раскрытия деталей реализации. Реализация~---~это собственно программный код, которые реализует поставленные методы класса.
+
+Интерфейс класса необходимо указывать в файле \lstinline|className.h|, где \emph{className}~---~название класса. В данном файле можно указать заголовочные файлы, которыми будет пользоваться класс; указать используемые пространства имен, а также указать сам класс с его свойствами и \emph{прототипами методов}, которые включают в себя имена методов, списки параметров методов и их возвращаемые значения.
+
+Пример интерфейса класса \emph{Student}:
+
+\emph{student.h}
+\begin{lstlisting}
+#ifndef STUDENT_H
+#define STUDENT_H
+
+#include<string>
+
+using namespace std;
+
+class Student
+{
+private:
+    string studentName;
+    string studentSurname;
+    int rating;
+    int ratingSize;
+    
+public:
+    Student(string name, string surname);
+    
+    string getStudentName();
+    void setStudentName(const string& name);
+    
+    string getStudentSurname();
+    void setStudentSurname(const string& surname);
+    
+    void addMark(int mark);
+    double getAverageRating();
+    
+    void printInformation();
+};
+
+#endif
+\end{lstlisting}
+
+В начале заголовочного файла ставится защита подключения~---~\emph{include guard}:
+
+\begin{lstlisting}
+#ifndef CLASSNAME_H
+#define CLASSNAME_H
+...
+#endif
+\end{lstlisting}
+
+, где вместо \lstinline|CLASSNAME|~---~название класса. Данный механизм используется для того, чтобы в коде при многочисленном обращении к данному заголовочному файлу оставался один экзмепляр данного файла, в противном случае возникнет ошибка компилятора по поводу дублирования файлов. Внутри данной конструкции необходимо перечислить все то, что необходимо защитить от копирования, в том числе и интерфейс классов.
+
+Обратите внимание, что в заголовочном классе нет реализации методов класса, вместо них указаны только их прототипы. 
+
+В данном примере рассматривается класс \lstinline|Student|. У него есть свойства \lstinline|studentName| (имя студента), \lstinline|studentSurname| (фамилия студента), \lstinline|rating| (сумма баллов), \lstinline|ratingSize| (количество введеных баллов). Для класса cуществует конструктор \lstinline|Student|, который принимает на вход имя и фамилию студента; \lstinline|get| и \lstinline|set| методы для свойств \lstinline|studentName| и \lstinline|studentSurname|; метод \lstinline|addMark|, который добавляет оценку к свойству \lstinline|rating|; метод \lstinline|getAverageRating|, который выводит средний балл студента и метод \lstinline|printInformation|, который выводит всю информацию о студенте. 
+
+Реализацию класса необходимо указывать в файле \lstinline|className.cpp|, где \emph{className}~---~название класса. В нем необходимо указать необходимые заголовочные файлы, пространства имен, а также \textbf{обязательно} указать заголовочный файл, в котором находится интерфейс данного класса.
+
+Пример реализации класса \emph{Student}:
+
+\emph{student.cpp}
+\begin{lstlisting}
+#include "student.h"
+#include <iostream>
+
+Student::Student(string name, string surname)
+{
+    studentName = name;
+    studentSurname = surname;
+    rating = 0;
+    ratingSize = 0;
+}
+
+string Student::getStudentName()
+{
+    return studentName;
+}
+
+void Student::setStudentName(const string& name)
+{
+    studentName = name;
+}
+
+string Student::getStudentSurname()
+{
+    return studentSurname;    
+}
+
+void Student::setStudentSurname(const string& surname)
+{
+    studentSurname = surname;
+}
+
+void Student::addMark(int mark)
+{
+    if (mark > 0)
+    {
+        rating += mark;
+        ++ratingSize;    
+    }
+}
+
+double Student::getAverageRating()
+{
+    return (double)(rating) / ratingSize;
+}
+
+void Student::printInformation()
+{
+    cout << "Student " << studentSurname << " " << studentName << " has average rating: " << getAverageRating() << endl; 
+}
+\end{lstlisting}
+
+Каждое имя метода предваряется именем класса и \lstinline|::|, \emph{бинарной (двухместной) операцией разрешения области действия}. Таким образом каждая реализация методов <<привязывается>> к соответствующему методу к интерфейсу. Если не указывать \lstinline|::|, то связывания не произойдет! 
+
+Для того, чтобы использовать данный разделенный класс в своих программах, также необходимо указать заголовочный файл с интерфейсом класса:
+
+\begin{lstlisting}
+#include "student.h"
+
+int main()
+{
+    Student firstStudent("Mark", "Ivanov");
+    
+    firstStudent.addMark(4);
+    firstStudent.addMark(5);
+    firstStudent.addMark(5);
+    
+    firstSrudent.printInformation();
+    
+    return 0;
+}
+\end{lstlisting}

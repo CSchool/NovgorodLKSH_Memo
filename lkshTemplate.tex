@@ -80,6 +80,11 @@
 \fancyhead[C]{\small{C++ and Qt}} % шапка верхнего колонтитула!!!
 \fancyfoot[C]{\small{\thepage}} % шапка нижнего колонтитула!!!
 
+% section on new page
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
+
 % стили листингов кодов
 
 \lstdefinestyle{CPlusPlus}{
@@ -106,5 +111,6 @@
 \clearpage
 
 \input{./first.tex}
+\input{./second.tex}
 
 \end{document} 
