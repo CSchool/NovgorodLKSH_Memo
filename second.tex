@@ -41,7 +41,7 @@ class Course
 {
 private:
     std::string courseName;
-    
+
 public:
     Course(const std::string& course)
     {
@@ -52,7 +52,7 @@ public:
     {
         std::cout << "Your course is " << courseName;
     }
-    
+
     std::string& getCourseName()
     {
         return courseName;
@@ -63,14 +63,14 @@ int main()
 {
     Course firstCourse("C++");
     Course secondCourse("Geometry");
-    
+
     firstCourse.printCourseName(); // "Your course is C++"
     secondCourse.printCourseName(); // "Your course is Geometry"
-    
+
     std::cout << "My favorite course is " << firstCourse.getCourseName() << " and not so favorite course is " << secondCourse.getCourseName() << std::endl;
-    
+
     // My favorite course is C++ and not so favorite course is Geometry
-    
+
     return 0;
 }
 \end{lstlisting}
@@ -84,7 +84,7 @@ int main()
     \item \lstinline|public|~---~все свойства и методы открыты для всех, т.е. через объект можно будет обращаться к методам, или изменять свойства (изменения могут происходить как внутри класса, так и снаружи);
     \item \lstinline|private|~---~свойства и методы в данной секции можно использовать только внутри класса, т.е. свойства изменяются только внутри \emph{этого} класса и методы можно вызывать только внутри \emph{этого} класса;
     \item \lstinline|protected|~---~доступ к свойствам и методам открыт как и внутри класса, так и внутри производных классов от изначального, снаружи свойства не изменяются, методы не вызываются;
-\end{itemize} 
+\end{itemize}
 
 Правила объявления секций доступа:
 \begin{lstlisting}
@@ -112,7 +112,7 @@ class Test
 };
 \end{lstlisting}
 
-Свойство \lstinline|publicInt| можно изменять как и внутри класса, так и снаружи через объект данного класса. Метод \lstinline|incPublicInt| также можно использовать как внутри класса, так и снаружи через объект. Доступ к свойству \lstinline|privateInt| и методу \lstinline|showMessage| через объект данного класса запрещен. Модификатор \lstinline|protected| необходим для ситуаций, когда происходит наследование классов. 
+Свойство \lstinline|publicInt| можно изменять как и внутри класса, так и снаружи через объект данного класса. Метод \lstinline|incPublicInt| также можно использовать как внутри класса, так и снаружи через объект. Доступ к свойству \lstinline|privateInt| и методу \lstinline|showMessage| через объект данного класса запрещен. Модификатор \lstinline|protected| необходим для ситуаций, когда происходит наследование классов.
 
 \subsubsection{Get- и Set- функции}
 Как правило, свойства в классах должны находится в \lstinline|private| секциях доступа. Однако существует возможность создать функции, которые позволяют получать значение (\lstinline|get|) и изменять эти значения (\lstinline|set|) через объекты классов.
@@ -173,10 +173,10 @@ int main()
 {
     Figure circle(15.0); // circle.square = 15.0;
     ...
-    
+
     return 0;
 }
-\end{lstlisting} 
+\end{lstlisting}
 
 Также существует \emph{конструктор по умолчанию}. Таким конструктором является всякий конструктор, у которого нет параметров и вызывается он в том случае, если создается объект без параметров. Если он явно не указан, то он генерируется автоматически с пустым содержимым.
 
@@ -191,7 +191,7 @@ public:
     {
         square = 0;
     }
-    
+
     Figure(double figureSquare) // constructor
     {
         square = figureSquare;
@@ -206,7 +206,7 @@ int main()
 
     return 0;
 }
-\end{lstlisting} 
+\end{lstlisting}
 
 Деструктор объявляется практически также, как и конструктор, но к названию добавляется символ~\lstinline|~|:
 
@@ -244,19 +244,19 @@ private:
     string studentSurname;
     int rating;
     int ratingSize;
-    
+
 public:
     Student(string name, string surname);
-    
+
     string getStudentName();
     void setStudentName(const string& name);
-    
+
     string getStudentSurname();
     void setStudentSurname(const string& surname);
-    
+
     void addMark(int mark);
     double getAverageRating();
-    
+
     void printInformation();
 };
 
@@ -274,9 +274,9 @@ public:
 
 , где вместо \lstinline|CLASSNAME|~---~название класса. Данный механизм используется для того, чтобы в коде при многочисленном обращении к данному заголовочному файлу оставался один экзмепляр данного файла, в противном случае возникнет ошибка компилятора по поводу дублирования файлов. Внутри данной конструкции необходимо перечислить все то, что необходимо защитить от копирования, в том числе и интерфейс классов.
 
-Обратите внимание, что в заголовочном классе нет реализации методов класса, вместо них указаны только их прототипы. 
+Обратите внимание, что в заголовочном классе нет реализации методов класса, вместо них указаны только их прототипы.
 
-В данном примере рассматривается класс \lstinline|Student|. У него есть свойства \lstinline|studentName| (имя студента), \lstinline|studentSurname| (фамилия студента), \lstinline|rating| (сумма баллов), \lstinline|ratingSize| (количество введеных баллов). Для класса cуществует конструктор \lstinline|Student|, который принимает на вход имя и фамилию студента; \lstinline|get| и \lstinline|set| методы для свойств \lstinline|studentName| и \lstinline|studentSurname|; метод \lstinline|addMark|, который добавляет оценку к свойству \lstinline|rating|; метод \lstinline|getAverageRating|, который выводит средний балл студента и метод \lstinline|printInformation|, который выводит всю информацию о студенте. 
+В данном примере рассматривается класс \lstinline|Student|. У него есть свойства \lstinline|studentName| (имя студента), \lstinline|studentSurname| (фамилия студента), \lstinline|rating| (сумма баллов), \lstinline|ratingSize| (количество введеных баллов). Для класса cуществует конструктор \lstinline|Student|, который принимает на вход имя и фамилию студента; \lstinline|get| и \lstinline|set| методы для свойств \lstinline|studentName| и \lstinline|studentSurname|; метод \lstinline|addMark|, который добавляет оценку к свойству \lstinline|rating|; метод \lstinline|getAverageRating|, который выводит средний балл студента и метод \lstinline|printInformation|, который выводит всю информацию о студенте.
 
 Реализацию класса необходимо указывать в файле \lstinline|className.cpp|, где \emph{className}~---~название класса. В нем необходимо указать необходимые заголовочные файлы, пространства имен, а также \textbf{обязательно} указать заголовочный файл, в котором находится интерфейс данного класса.
 
@@ -307,7 +307,7 @@ void Student::setStudentName(const string& name)
 
 string Student::getStudentSurname()
 {
-    return studentSurname;    
+    return studentSurname;
 }
 
 void Student::setStudentSurname(const string& surname)
@@ -320,7 +320,7 @@ void Student::addMark(int mark)
     if (mark > 0)
     {
         rating += mark;
-        ++ratingSize;    
+        ++ratingSize;
     }
 }
 
@@ -331,11 +331,11 @@ double Student::getAverageRating()
 
 void Student::printInformation()
 {
-    cout << "Student " << studentSurname << " " << studentName << " has average rating: " << getAverageRating() << endl; 
+    cout << "Student " << studentSurname << " " << studentName << " has average rating: " << getAverageRating() << endl;
 }
 \end{lstlisting}
 
-Каждое имя метода предваряется именем класса и \lstinline|::|, \emph{бинарной (двухместной) операцией разрешения области действия}. Таким образом каждая реализация методов <<привязывается>> к соответствующему методу к интерфейсу. Если не указывать \lstinline|::|, то связывания не произойдет! 
+Каждое имя метода предваряется именем класса и \lstinline|::|, \emph{бинарной (двухместной) операцией разрешения области действия}. Таким образом каждая реализация методов <<привязывается>> к соответствующему методу к интерфейсу. Если не указывать \lstinline|::|, то связывания не произойдет!
 
 Для того, чтобы использовать данный разделенный класс в своих программах, также необходимо указать заголовочный файл с интерфейсом класса:
 
@@ -345,13 +345,151 @@ void Student::printInformation()
 int main()
 {
     Student firstStudent("Mark", "Ivanov");
-    
+
     firstStudent.addMark(4);
     firstStudent.addMark(5);
     firstStudent.addMark(5);
-    
+
     firstSrudent.printInformation();
-    
+
     return 0;
 }
 \end{lstlisting}
+
+\subsection{Наследование}
+\subsubsection{Введение}
+Наследование --- это способ повторного использования программного обеспечения, при котором новые \emph{производные} классы (наследники) создаются на базе уже существующих \emph{базовых} классов (родителей).
+
+При создании новый класс является наследником свойств и методов ранее определенного базового класса. Создаваемый путем наследования класс является \emph{производным} (derived class), который в свою очередь может выступать в качестве \emph{базового} класса (based class) для создаваемых классов. Если имена методов производного и базового классов совпадают, то методы производного класса перегружают методы базового класса.
+
+Наследование производится следующим образом:
+
+\begin{lstlisting}
+class DerivedClassName : typeInheritance BaseClassName
+{
+public:
+    ...
+private:
+    ...
+protected:
+    ...
+};
+\end{lstlisting}
+
+, где \lstinline|DerivedClassName|~---~производный класс, \lstinline|typeInheritance|~---~способ наследования, \lstinline|BaseClassName|~---~базовый класс.
+
+Пример наследования:
+\begin{lstlisting}
+class Human
+{
+public:
+    std::string name;
+    unsigned int age;
+
+    Human(std::string humanName, unsigned int humanAge)
+    {
+        name = humanName;
+        age = humanAge;
+    }
+};
+
+class Student : public Human
+{
+public:
+    std::string university;
+
+    Student(std::string humanName, unsigned int humanAge, std::string studentUniversity) : Human(humanName, humanAge)
+    {
+        university = studentUniversity;
+    }
+};
+
+int main()
+{
+    Student student("Anton", 23, "NOVSU");
+    std::cout << "Student " << student.name << ", age " << student.age << ", studies in " << student.university << std::endl;
+    // Student Anton, age 23, studies in NOVSU
+    return 0;
+}
+\end{lstlisting}
+
+В данном примере рассмотрен класс \lstinline|Human|, у которого есть свойства \lstinline|name| (имя человека) и \lstinline|age| (возраст). При помощи конструктора можно инициализировать эти свойства. Класс \lstinline|Student| наследуется от класса \lstinline|Human|, в результате чего также владеет свойствами \lstinline|name| и \lstinline|age|, а также добавляет своё свойство \lstinline|university| (университет, где он учится). Каждый базовый класс, который участвует в наследовании, должен быть инициализирован во время инициализации своего потомка. Поэтому в конструктор класса \lstinline|Student| передаются параметры для класса \lstinline|Human|, и данные параметры используется в конструкторе класса \lstinline|Human|.
+
+\subsubsection{Модификатор доступа protected}
+Если в базовом классе свойства и методы имеют модификатор доступа \lstinline|private|, то производный класс не будет иметь доступ к ним при наследовании. Если свойства и методы будут иметь модификатор доступа \lstinline|public|, то доступ будут иметь абсолютно все, что не есть хорошо. При помощи модификатора \lstinline|protected| можно разрешить производному классу обращаться к свойствам и методам базового класса, но при этому доступ извне к ним не будет осуществляться!
+
+Пример:
+
+\begin{lstlisting}
+class Rectangle
+{
+protected:
+    double width, length;
+public:
+    Rectangle(double recWidth, double recLength)
+    {
+        width = recWidth;
+        length = recLength;
+    }
+
+    double getSquare()
+    {
+        return width * length;
+    }
+};
+
+class Cuboid : public Rectangle
+{
+private:
+    double height;
+public:
+    Cuboid(double cubWidth, double cubLength, double cubHeight) : Rectangle(cubWidth, cubLength)
+    {
+        height = cubHeight;
+    }
+
+    double getVolume()
+    {
+        return width * length * height;
+    }
+};
+
+int main()
+{
+    Rectangle rectangle(5.0, 3.0);
+    Cuboid cuboid(10.0, 6.0, 2.0);
+
+    std::cout << "Rectangle's square = " << rectangle.getSquare() << std::endl;
+    std::cout << "Cuboid's bottom square = " << cuboid.getSquare() << ", cuboid's volume = " << cuboid.getVolume() << std::endl;
+
+    // Rectangle's square = 15
+    // Cuboid's bottom square = 60, cuboid's volume = 120
+
+    return 0;
+}
+\end{lstlisting}
+
+В данном примере рассматриваются классы \lstinline|Rectangle| (прямоугольник) и \lstinline|Cuboid| (прямоугольный параллелепипед). У класса \lstinline|Rectangle| есть свойства \lstinline|width| (ширина) и \lstinline|length| (длина), которые имею модификатор доступа \lstinline|protected|, и конструктор, в который передаются значения ширины и высоты, а также публичный метод \lstinline|getSquare|, который позволяет получить площадь прямоугольника. Класс \lstinline|Cuboid| наследуется от класса \lstinline|Rectangle|, имеет доступ к свойствами \lstinline|width| и \lstinline|length|, добавляет своё свойство \lstinline|height| (высота) и новый метод \lstinline|getVolume|, позволяющий получить объем. В методе \lstinline|getVolume| класса \lstinline|Cuboid| возвращает произведение длины, ширины и высоты, доступ к длине и ширине базового класса обеспечивается модификатором доступа \lstinline|protected|.
+
+\subsubsection{Типы наследования}
+
+При наследовании классов можно указать тип наследования, которые могут модифицировать существующие модификаторы доступа. Следующая табличка раскрывает взаимодействие типов наследования и модификаторов доступа:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{3cm}|}
+        \hline
+        & \multicolumn{3}{c|}{Исходный модификатор доступа} \\
+        \hline
+        & \lstinline|public| & \lstinline|private| & \lstinline|protected| \\ 
+        \hline
+        public-наследование & \cellcolor{green}\emph{public} & \cellcolor{red}\emph{private} & \cellcolor{blue}\emph{protected} \\
+        \hline
+        private-наследование & \cellcolor{red}\emph{private} & \cellcolor{red}\emph{private} & \cellcolor{red}\emph{private} \\
+        \hline
+        protected-наследование & \cellcolor{blue}\emph{protected} & \cellcolor{red}\emph{private} & \cellcolor{blue}\emph{protected} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Множественное наследование}
